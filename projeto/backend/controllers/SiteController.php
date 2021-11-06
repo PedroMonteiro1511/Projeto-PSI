@@ -7,6 +7,7 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 use yii\web\Response;
 
 /**
@@ -62,7 +63,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        if (Yii::$app->user->can('login-admin')){
+            return $this->render('index');
+        }else{
+            Yii::$app->user->logout();
+        }
     }
 
     /**
@@ -72,22 +77,27 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+            if (!Yii::$app->user->isGuest) {
+                return $this->goHome();
+            }
 
-        $this->layout = 'blank';
+            $this->layout = 'blank';
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        }
+            $model = new LoginForm();
+            if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                if (Yii::$app->user->can('login-admin')){
+                    return $this->goBack();
+                }else{
+                    Yii::$app->user->logout();
+                }
 
-        $model->password = '';
+            }
 
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+            $model->password = '';
+
+            return $this->render('login', [
+                'model' => $model,
+            ]);
     }
 
     /**
