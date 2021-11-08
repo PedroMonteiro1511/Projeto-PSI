@@ -11,7 +11,6 @@ $this->title = 'My Yii Application';
 
         <p class="lead">Começa agora a vendar e comprar o que precisas.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://projeto-frontend.test/index.php?r=site%2Flogin">Login!</a></p>
     </div>
 
     <div class="body-content">

@@ -37,26 +37,31 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return 'user';
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->auth_key = \Yii::$app->security->generateRandomString();
+                $this->setPassword($this->password_hash);
+            } else {
+                if (!empty($this->password_hash)) {
+                    $this->setPassword($this->password_hash);
+                } else {
+                    $this->password_hash = (string) $this->getOldAttribute('password_hash');
+                }
+            }
+            return true;
+        }
+        return false;
+    }
     /**
      * {@inheritdoc}
      */
-   /*public function beforeSave($insert) {
-        if ($insert) {
-            $this->setPassword($this->password_hash);
-        } else {
-            if (!empty($this->password_hash)) {
-                $this->setPassword($this->password_hash);
-            } else {
-                $this->password_hash = (string) $this->getOldAttribute('password_hash');
-            }
-        }
-        return parent::beforeSave($insert);
-    }*/
 
     public function rules()
     {
         return [
-            [['auth_key', 'username','email', 'password_hash'], 'required'],
+            [['username','email', 'password_hash'], 'required'],
             ['password_hash', 'required', 'on' => 'insert'],
             [['username', 'password_hash', 'email'], 'string', 'max' => 255],
             [['username'], 'unique'],

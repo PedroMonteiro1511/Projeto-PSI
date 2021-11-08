@@ -258,8 +258,12 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionReservado(){
-        return $this->render('reservado');
+    public function actionFavorito(){
+        return $this->render('favoritos');
+    }
+
+    public function actionMvenda(){
+        return $this->render('mvendas');
     }
 
     public function actionVer(){
