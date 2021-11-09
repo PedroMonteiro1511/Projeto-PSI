@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 06-Nov-2021 às 16:01
--- Versão do servidor: 10.4.10-MariaDB
--- versão do PHP: 7.3.12
+-- Tempo de geração: 09-Nov-2021 às 00:10
+-- Versão do servidor: 5.7.31
+-- versão do PHP: 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `saleson`
+-- Banco de dados: `psiprojeto`
 --
 
 -- --------------------------------------------------------
@@ -55,9 +54,9 @@ DROP TABLE IF EXISTS `auth_item`;
 CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
-  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
   `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` blob DEFAULT NULL,
+  `data` blob,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`),
@@ -103,7 +102,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 DROP TABLE IF EXISTS `auth_rule`;
 CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `data` blob DEFAULT NULL,
+  `data` blob,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -149,24 +148,25 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT 10,
-  `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '10',
+  `created_at` int(11) DEFAULT NULL,
+  `updated_at` int(11) DEFAULT NULL,
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(1, 'Monteiro', 'HjaVmMqGqGrs6BLDBA0ZyNCZiRIbDm1B', '$2y$13$SHuZXF6t1CBH.IR61llHN.HamUYA1GNtlbw.typsRB4b9ChsRWVLO', NULL, 'pedromonteiroescola@outlook.pt', 10, 1636206612, 1636206612, '-4OieUlH0T_efyvaXpl06AV-1vQAYu2C_1636206612'),
+(1, 'Monteiro', 'HjaVmMqGqGrs6BLDBA0ZyNCZiRIbDm1B', '$2y$13$SHuZXF6t1CBH.IR61llHN.HamUYA1GNtlbw.typsRB4b9ChsRWVLO', '', 'ppedromonteiroescola@outlook.pt', 10, 1636206612, 1636206612, '-4OieUlH0T_efyvaXpl06AV-1vQAYu2C_1636206612'),
 (2, 'MonteiroGestor', 'lroZV_MJYB0AtmSvcYbXCrbaWHjUj9nP', '$2y$13$0vHef9B7GA1qIGk4OVQ2b.qYsum5uUKXvwYbZ3RDuaajCUlcAd2Qi', NULL, 'pedromonteiroescola2@outlook.pt', 10, 1636208093, 1636208093, 'SNrjmMt0zpv5cRFOzaTAe2h1WYcQd80g_1636208093'),
-(3, 'MonteiroGuest', 'wg5vuJF_ShC8QuplO9I-VxFT7WzjoDIF', '$2y$13$/kRV.csFfYlyWpYdM8/9AuMeU.8a9Hu34npxfTSiIxjSSRUdIujL6', NULL, 'MonteiroGuest@hotmail.com', 10, 1636214125, 1636214125, 'hb9mx8QEYIGop6DrorHc8hscRvcok9RN_1636214125');
+(3, 'MonteiroGuest', 'wg5vuJF_ShC8QuplO9I-VxFT7WzjoDIF', '$2y$13$/kRV.csFfYlyWpYdM8/9AuMeU.8a9Hu34npxfTSiIxjSSRUdIujL6', NULL, 'MonteiroGuest@hotmail.com', 10, 1636214125, 1636214125, 'hb9mx8QEYIGop6DrorHc8hscRvcok9RN_1636214125'),
+(22, 'joseramos', 'sxLSdNpObujxwlGNlUQp42sJ7F3WChFV', '$2y$13$tVw5qnVfI6xZVOQLMp4tVeBP64fMgDyI37FqcqMbwUUMMNTKYuKh2', NULL, 'josesantos@gmail.com', 10, 1636413964, 1636413964, 'LGBNQtfVHEPREKbh81EFTpnlX6Mtos5l_1636413964');
 
 --
 -- Restrições para despejos de tabelas
