@@ -259,11 +259,20 @@ class SiteController extends Controller
     }
 
     public function actionFavorito(){
-        return $this->render('favoritos');
+        if (Yii::$app->user->isGuest){
+            return $this->render('index');
+        }else{
+            return $this->render('favoritos');
+        }
+
     }
 
     public function actionMvenda(){
-        return $this->render('mvendas');
+        if (Yii::$app->user->isGuest){
+            return $this->render('index');
+        }else{
+            return $this->render('mvendas');
+        }
     }
 
     public function actionVer(){
