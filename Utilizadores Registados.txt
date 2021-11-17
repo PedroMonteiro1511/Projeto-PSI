@@ -1,6 +1,6 @@
 Utilizadores:
 	-Admin: 
-		Username : Monteiro
+		Username : MonteiroAdmin
 		Password : pedromonteiro
 		Permissões para aceder ao backend : Sim
 	
