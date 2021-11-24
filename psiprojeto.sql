@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 17-Nov-2021 às 11:31
+-- Tempo de geração: 24-Nov-2021 às 10:32
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('gestor', '2', NULL),
-('login-admin', '24', NULL);
+('login-admin', '24', NULL),
+('login-admin', '27', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('create-leilao', 1, 'Permite ao utilizador criar um leilão', NULL, NULL, NULL, NULL),
 ('gestor', 1, 'Utilzadores com role Gestor', NULL, NULL, NULL, NULL),
 ('login-admin', 1, 'Permite a um admin fazer login no backend', NULL, NULL, NULL, NULL);
 
@@ -125,7 +127,14 @@ CREATE TABLE IF NOT EXISTS `leilao` (
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `leilao`
+--
+
+INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `aprovado`) VALUES
+(1, 27, 'leilao1', 'Leilao1', '2021-11-24 09:51:46', '437', 'N');
 
 -- --------------------------------------------------------
 
@@ -175,15 +184,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(24, 'MonteiroAdmin', 'PRDzd184_UxQCHHpXP2okv_0Ver6hXIp', '$2y$13$EV49o3Lc8JKQE3YSx4Fwy.d01dl9tO5o/.Dk8ATXvGulWv.3Pwteq', NULL, 'Monteiro@gmail.com', 10, '2021-11-17 10:38:16', '2021-11-17 10:38:16', NULL),
-(26, 'Monteiro2', 'l8ngJAer_fRe89itTBY_kuZ71rXfZ7SS', '$2y$13$VsIBZh9mIifQ/gy7cYijJeoTal72W4X43FVST4BgXOikMOrB1cPle', NULL, 'Monteiro2@gmail.com', 10, '2021-11-17 10:57:57', '2021-11-17 10:57:57', '0aKabNfWEVvL7WOv8qmIUhAnAgDY5Skc_1637146677');
+(24, 'MonteiroAdmin', 'PRDzd184_UxQCHHpXP2okv_0Ver6hXIp', '$2y$13$CYQmpTe1a/uwSx08rmBjguL2GRXxzvBr3IKMTMmWdB.W.V3lB.DK.', NULL, 'Monteiro@gmail.com', 10, '2021-11-17 10:38:16', '2021-11-17 10:38:16', NULL),
+(26, 'Monteiro2', 'l8ngJAer_fRe89itTBY_kuZ71rXfZ7SS', '$2y$13$VsIBZh9mIifQ/gy7cYijJeoTal72W4X43FVST4BgXOikMOrB1cPle', NULL, 'Monteiro2@gmail.com', 10, '2021-11-17 10:57:57', '2021-11-17 10:57:57', '0aKabNfWEVvL7WOv8qmIUhAnAgDY5Skc_1637146677'),
+(27, 'Admin', 'FkJ6_LGo41-dz2rexx9Xm4MWgqRtAl5I', '$2y$13$d5OAJY01UjjhayGfz38AL.7WQdJwBPSQUaE4qtENcAcAdLmxh5Eu.', NULL, 'admin@gmail.com', 10, '2021-11-18 11:43:43', '2021-11-18 11:43:43', 'gmc09aKcNibfdFjQmYWRbDcVO64eP30F_1637235823');
 
 -- --------------------------------------------------------
 

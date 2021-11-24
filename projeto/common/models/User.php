@@ -211,4 +211,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         $this->password_reset_token = null;
     }
+
+    public function getLeilao()
+    {
+        return $this->hasMany(Leilao::className(), ['idUser' => 'id']);
+    }
+
 }
