@@ -120,6 +120,10 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionMinhasVendas(){
+
+    }
+
     /**
      * Logs out the current user.
      *
@@ -290,6 +294,13 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest){
             return $this->render('index');
         }else{
+            $searchModel = new LeilaoSearch();
+            $dataProvider = $searchModel->searchID($this->request->queryParams);
+
+            return $this->render('mVendas', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
             return $this->render('mvendas');
         }
     }

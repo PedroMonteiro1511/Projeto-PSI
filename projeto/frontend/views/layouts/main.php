@@ -35,7 +35,7 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Homeeeeee', 'url' => ['/site/index']],
+        ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Artigos', 'url' => ['/produto/index']],
         ['label' => 'Leilões', 'url' => ['/leilao/index']],
 
@@ -45,7 +45,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/site/favorito']];
-        $menuItems[] = ['label' => 'Minhas vendas', 'url' => ['/site/mvenda']];
+        $menuItems[] = ['label' => 'Minhas Vendas', 'url' => ['/site/mvenda']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(
