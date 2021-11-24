@@ -15,15 +15,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= $form->field($model, 'titulo')->textInput(['placeholder' => Yii::t('app', 'Pesquise aqui!'), 'value' => ''])->label(false) ?>
 
-    <?= $form->field($model, 'idUser') ?>
-
-    <?= $form->field($model, 'titulo') ?>
-
-    <?= $form->field($model, 'descricao') ?>
-
-    <?= $form->field($model, 'preco') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
