@@ -5,16 +5,6 @@ Utilizadores:
 		Permissões para aceder ao backend : Sim
 	
 	
-	-Gestor: 
-		Username : MonteiroGestor
-		Password : adminnot
-		Permissões para aceder ao backend : Sim
 
-
-	-Guest: 
-		Username : MonteiroGuest
-		Password : userguest
-		Permissões para aceder ao backend : Não
-			
 		
 
