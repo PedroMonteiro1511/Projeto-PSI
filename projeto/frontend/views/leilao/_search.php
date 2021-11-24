@@ -15,7 +15,10 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'titulo')->textInput(['placeholder' => Yii::t('app', 'Pesquise aqui!'), 'value' => ''])->label(false) ?>
+
+    <?= $form->field($model, 'titulo',[
+            'template'=>"<label> Pesquise pelo Titulo </label>\n{input}\n{hint}\n{error}"
+    ]) ?>
 
     <?php // echo $form->field($model, 'precobase') ?>
 
@@ -23,7 +26,8 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::a('Reset', ['index'], ['class' => 'btn btn-outline-secondary']) ?>
+
     </div>
 
     <?php ActiveForm::end(); ?>

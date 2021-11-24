@@ -120,10 +120,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionMinhasVendas(){
-
-    }
-
     /**
      * Logs out the current user.
      *
