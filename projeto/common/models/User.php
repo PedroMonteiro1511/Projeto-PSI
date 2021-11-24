@@ -217,4 +217,9 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasMany(Leilao::className(), ['idUser' => 'id']);
     }
 
+    public function getVenda()
+    {
+        return $this->hasMany(Venda::className(), ['idUser' => 'id']);
+    }
+
 }
