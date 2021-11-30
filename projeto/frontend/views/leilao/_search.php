@@ -16,9 +16,8 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
 
-    <?= $form->field($model, 'titulo',[
-            'template'=>"<label> Pesquise pelo Titulo </label>\n{input}\n{hint}\n{error}"
-    ]) ?>
+    <?= $form->field($model, 'titulo')->textInput(['placeholder' => Yii::t('app', 'Pesquise aqui!'), 'value' => ''])->label(false) ?>
+
 
     <?php // echo $form->field($model, 'precobase') ?>
 
