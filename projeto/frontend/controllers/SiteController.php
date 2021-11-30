@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Leilao;
 use common\models\LeilaoSearch;
+use common\models\VendaSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -291,13 +292,16 @@ class SiteController extends Controller
             return $this->render('index');
         }else{
             $searchModel = new LeilaoSearch();
+            $searchModelVenda = new VendaSearch();
             $dataProvider = $searchModel->searchID($this->request->queryParams);
+            $dataProviderVenda = $searchModelVenda->search($this->request->queryParams);
 
             return $this->render('mVendas', [
                 'searchModel' => $searchModel,
+                'searchModelVenda' => $searchModelVenda,
                 'dataProvider' => $dataProvider,
+                'dataProviderVenda' => $dataProviderVenda,
             ]);
-            return $this->render('mvendas');
         }
     }
 

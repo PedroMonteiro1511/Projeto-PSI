@@ -6,6 +6,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $dataProviderVenda yii\data\ActiveDataProvider */
 
 $this->title = 'Minhas Vendas';
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,6 +32,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'datalimite',
         'precobase',
         'aprovado',
+
+        ['class' => 'yii\grid\ActionColumn'],
+    ],
+]);  ?>
+
+
+
+<?= GridView::widget([
+    'dataProvider' => $dataProviderVenda,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+
+        'titulo',
+        'descricao:ntext',
+        'preco',
+        //'aprovado',
 
         ['class' => 'yii\grid\ActionColumn'],
     ],

@@ -45,7 +45,7 @@ class VendaSearch extends Venda
 
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
+        $dataProviderVenda = new ActiveDataProvider([
             'query' => $query,
         ]);
 
@@ -54,7 +54,7 @@ class VendaSearch extends Venda
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
-            return $dataProvider;
+            return $dataProviderVenda;
         }
 
         // grid filtering conditions
@@ -67,6 +67,6 @@ class VendaSearch extends Venda
         $query->andFilterWhere(['like', 'titulo', $this->titulo])
             ->andFilterWhere(['like', 'descricao', $this->descricao]);
 
-        return $dataProvider;
+        return $dataProviderVenda;
     }
 }
