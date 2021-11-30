@@ -69,4 +69,36 @@ class VendaSearch extends Venda
 
         return $dataProviderVenda;
     }
+
+    public function searchVenda($params)
+    {
+        $query = Venda::find();
+
+        // add conditions that should always apply here
+
+        $dataProviderVenda = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProviderVenda;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'idUser' => \Yii::$app->getUser()->id,
+            'preco' => $this->preco,
+        ]);
+
+        $query->andFilterWhere(['like', 'titulo', $this->titulo])
+            ->andFilterWhere(['like', 'descricao', $this->descricao]);
+
+        return $dataProviderVenda;
+    }
+
 }

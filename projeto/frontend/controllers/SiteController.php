@@ -294,7 +294,7 @@ class SiteController extends Controller
             $searchModel = new LeilaoSearch();
             $searchModelVenda = new VendaSearch();
             $dataProvider = $searchModel->searchID($this->request->queryParams);
-            $dataProviderVenda = $searchModelVenda->search($this->request->queryParams);
+            $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
 
             return $this->render('mVendas', [
                 'searchModel' => $searchModel,
