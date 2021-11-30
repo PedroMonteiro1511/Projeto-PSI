@@ -45,7 +45,8 @@ $menuItems = [
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Favoritos', 'url' => ['/site/favorito']];
-        $menuItems[] = ['label' => 'Minhas Vendas', 'url' => ['/site/mvenda']];
+        $menuItems[] = ['label' => 'Meus Artigos', 'url' => ['/site/mvenda']];
+        $menuItems[] = ['label' => 'Meu Perfil', 'url' => ['/user/view' , 'id'=>Yii::$app->getUser()->id]];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(

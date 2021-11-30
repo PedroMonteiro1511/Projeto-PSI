@@ -2,17 +2,16 @@
 
 namespace frontend\controllers;
 
-use common\models\Leilao;
-use common\models\LeilaoSearch;
-use common\models\VendaSearch;
+use app\models\User;
+use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * LeilaoController implements the CRUD actions for Leilao model.
+ * UserController implements the CRUD actions for User model.
  */
-class LeilaoController extends Controller
+class UserController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,44 +32,22 @@ class LeilaoController extends Controller
     }
 
     /**
-     * Lists all Leilao models.
+     * Lists all User models.
      * @return mixed
      */
     public function actionIndex()
     {
-            $searchModel = new LeilaoSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+        $searchModel = new UserSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
-            return $this->render('index', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-            ]);
-
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
-
-
-    public function actionMvenda(){
-        if (\Yii::$app->user->isGuest){
-            return $this->render('index');
-        }else{
-            $searchModel = new LeilaoSearch();
-            $searchModelVenda = new VendaSearch();
-            $dataProvider = $searchModel->searchID($this->request->queryParams);
-            $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
-
-            return $this->render('mVendas', [
-                'searchModel' => $searchModel,
-                'searchModelVenda' => $searchModelVenda,
-                'dataProvider' => $dataProvider,
-                'dataProviderVenda' => $dataProviderVenda,
-            ]);
-        }
-    }
-
-
 
     /**
-     * Displays a single Leilao model.
+     * Displays a single User model.
      * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -83,34 +60,29 @@ class LeilaoController extends Controller
     }
 
     /**
-     * Creates a new Leilao model.
+     * Creates a new User model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->isGuest){
-            return $this->goHome();
-        }else{
-            $model = new Leilao();
+        $model = new User();
 
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            } else {
-                $model->loadDefaultValues();
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        } else {
+            $model->loadDefaultValues();
         }
 
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Leilao model.
+     * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return mixed
@@ -130,7 +102,7 @@ class LeilaoController extends Controller
     }
 
     /**
-     * Deletes an existing Leilao model.
+     * Deletes an existing User model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return mixed
@@ -144,15 +116,15 @@ class LeilaoController extends Controller
     }
 
     /**
-     * Finds the Leilao model based on its primary key value.
+     * Finds the User model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Leilao the loaded model
+     * @return User the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Leilao::findOne($id)) !== null) {
+        if (($model = User::findOne($id)) !== null) {
             return $model;
         }
 

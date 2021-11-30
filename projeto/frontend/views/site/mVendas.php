@@ -16,17 +16,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <p>
     <?= Html::a('Adicionar um leilão', ['create'], ['class' => 'btn btn-success']) ?>
 
-    <?= Html::a('Adicionar uma Venda', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Adicionar uma Venda', ['vendas'], ['class' => 'btn btn-success']) ?>
 </p>
 
-<?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+
+
+<h1 align="center">Leilões</h1>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
-
-
         'titulo',
         'descricao:ntext',
         'datalimite',
@@ -37,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
 ]);  ?>
 
+
+<h1 align="center">Vendas</h1>
 
 
 <?= GridView::widget([

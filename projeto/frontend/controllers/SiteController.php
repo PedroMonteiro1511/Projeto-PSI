@@ -2,8 +2,11 @@
 
 namespace frontend\controllers;
 
+use common\models\User;
+use app\models\UserSearch;
 use common\models\Leilao;
 use common\models\LeilaoSearch;
+use common\models\Venda;
 use common\models\VendaSearch;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
@@ -19,6 +22,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\web\NotFoundHttpException;
 
 /**
  * Site controller
@@ -121,6 +125,21 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionVendas(){
+        $model = new Venda();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('../venda/create', [
+            'model' => $model,
+        ]);
+    }
     /**
      * Logs out the current user.
      *
@@ -165,6 +184,7 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
 
     /**
      * Signs user up.
@@ -303,6 +323,30 @@ class SiteController extends Controller
                 'dataProviderVenda' => $dataProviderVenda,
             ]);
         }
+    }
+
+    public function actionUser($id){
+        if (Yii::$app->user->isGuest){
+            return $this->render('index');
+        }else{
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+
+            return $this->render('user', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        }
+    }
+
+
+    protected function findModel($id)
+    {
+        if (($model = \app\models\User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 
     public function actionVer(){
