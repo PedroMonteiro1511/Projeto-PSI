@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "venda".
@@ -13,11 +14,11 @@ use yii\db\ActiveRecord;
  * @property string $titulo
  * @property string $descricao
  * @property float $preco
- *
  * @property User $idUser0
  */
 class Venda extends ActiveRecord
 {
+    public $imagem;
     /**
      * {@inheritdoc}
      */
@@ -49,6 +50,7 @@ class Venda extends ActiveRecord
             [['descricao'], 'string'],
             [['preco'], 'number'],
             [['titulo'], 'string', 'max' => 50],
+            [['imagem'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
@@ -64,8 +66,10 @@ class Venda extends ActiveRecord
             'titulo' => 'Titulo',
             'descricao' => 'Descricao',
             'preco' => 'Preco',
+            'imagem' => 'Imagem',
         ];
     }
+
 
     /**
      * Gets query for [[IdUser0]].
@@ -76,4 +80,5 @@ class Venda extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'idUser']);
     }
+
 }

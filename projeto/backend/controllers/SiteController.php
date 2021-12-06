@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use frontend\models\Venda;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -110,5 +111,12 @@ class SiteController extends Controller
         Yii::$app->user->logout();
 
         return $this->goHome();
+    }
+
+    public function actionVenda($model)
+    {
+        return $this->render('@frontend/views/venda/index', [
+            'model' => $model,
+        ]);
     }
 }

@@ -7,7 +7,9 @@ use app\models\UserSearch;
 use common\models\Leilao;
 use common\models\LeilaoSearch;
 use common\models\Venda;
+
 use common\models\VendaSearch;
+
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -325,6 +327,7 @@ class SiteController extends Controller
         }
     }
 
+
     public function actionUser($id){
         if (Yii::$app->user->isGuest){
             return $this->render('index');
@@ -339,7 +342,7 @@ class SiteController extends Controller
         }
     }
 
-
+/*
     protected function findModel($id)
     {
         if (($model = \app\models\User::findOne($id)) !== null) {
@@ -347,10 +350,28 @@ class SiteController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+
+    public function actionVendas(){
+        $model = new Venda();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
+        }
+
+        return $this->render('../venda/create', [
+            'model' => $model,
+        ]);
+
+    }
     }
 
-    public function actionVer(){
-        return $this->render('produtos');
-    }
 
+    public function actionPerfil(){
+        return $this->render('perfil');
+    }
+*/
 }

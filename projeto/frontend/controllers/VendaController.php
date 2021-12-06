@@ -7,6 +7,7 @@ use common\models\VendaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * VendaController implements the CRUD actions for Venda model.
@@ -69,7 +70,9 @@ class VendaController extends Controller
         $model = new Venda();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->imagem = Venda::getInstances($model, 'imagem');
+                $model -> save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -130,4 +133,5 @@ class VendaController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
 }

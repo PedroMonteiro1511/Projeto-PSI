@@ -41,6 +41,7 @@ use yii\bootstrap\Nav;
                         'url' => '#'
                     ],
                     ['label' => '<span class="fa fa-file-code-o"></span> Utilizadores', 'url' => ['/user/index']],
+                    ['label' => '<span class="fa fa-file-code-o"></span> Vendas', 'url' => ['/site/venda']],
                     ['label' => '<span class="fa fa-dashboard"></span> Debug', 'url' => ['/debug']],
                 ],
             ]

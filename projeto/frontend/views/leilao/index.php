@@ -28,7 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'precobase',
             //'aprovado',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' =>'{view}'
+            ]
         ],
     ]);  ?>
 

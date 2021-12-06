@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datetimepicker\DateTimePicker;
 
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Leilao */
 /* @var $form yii\widgets\ActiveForm */
@@ -13,25 +14,9 @@ use dosamigos\datetimepicker\DateTimePicker;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'titulo')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'titulo')->textInput(['placeholder' => Yii::t('app', 'Titulo'), 'value' => ''])->label('Titulo') ?>
 
-    <?= $form->field($model, 'descricao')->textarea(['rows' => 6]) ?>
-
-    <?php
-
-    $dateRangePickerOptions = [
-        'model' => $model,
-        'attribute' => 'datetime',
-        'language' => 'pt',
-        'size' => 'ms',
-        'clientOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy dd MM - HH:ii P',
-            'todayBtn' => true
-        ]
-    ];
-
-    ?>
+    <?= $form->field($model, 'descricao')->textarea(['rows' => 6,'placeholder' => Yii::t('app', 'Descrição'), 'value' => ''])->label('Descrição') ?>
 
     <?= $form->field($model, 'datalimite')->widget(DateTimePicker::className(), [
         'language' => 'pt',
@@ -39,8 +24,10 @@ use dosamigos\datetimepicker\DateTimePicker;
         'pickButtonIcon' => 'glyphicon glyphicon-time',
         'inline' => true,
         'clientOptions' => [
+            'startView' => 2,
             'autoclose' => true,
-            'format' => 'yyyy dd MM - HH:ii P',
+            'linkFormat' => 'dd MM yyyy - HH:ii P', // if inline = true
+            // 'format' => 'HH:ii P', // if inline = false
             'todayBtn' => true
         ]
     ]);?>

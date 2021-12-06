@@ -24,6 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1 align="center">Leilões</h1>
 
+
+
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'columns' => [
@@ -54,4 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['class' => 'yii\grid\ActionColumn'],
     ],
-]);  ?>
+]);
+?>
+
