@@ -60,6 +60,15 @@ class Leilao extends \yii\db\ActiveRecord
         ];
     }
 
+    protected function getLeilao()
+    {
+        if ($this->_leilao === null) {
+            $this->_leilao = (new Leilao())->getId($this->id);
+        }
+
+        return $this->_leilao;
+    }
+
     /**
      * {@inheritdoc}
      */

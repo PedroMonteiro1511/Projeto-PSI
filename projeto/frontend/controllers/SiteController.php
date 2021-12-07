@@ -309,24 +309,6 @@ class SiteController extends Controller
 
     }
 
-    public function actionMvenda(){
-        if (Yii::$app->user->isGuest){
-            return $this->render('index');
-        }else{
-            $searchModel = new LeilaoSearch();
-            $searchModelVenda = new VendaSearch();
-            $dataProvider = $searchModel->searchID($this->request->queryParams);
-            $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
-
-            return $this->render('mVendas', [
-                'searchModel' => $searchModel,
-                'searchModelVenda' => $searchModelVenda,
-                'dataProvider' => $dataProvider,
-                'dataProviderVenda' => $dataProviderVenda,
-            ]);
-        }
-    }
-
 
     public function actionUser($id){
         if (Yii::$app->user->isGuest){

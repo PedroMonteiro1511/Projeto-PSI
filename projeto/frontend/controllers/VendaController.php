@@ -2,8 +2,10 @@
 
 namespace frontend\controllers;
 
+use common\models\LeilaoSearch;
 use common\models\Venda;
 use common\models\VendaSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,6 +47,25 @@ class VendaController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+    public function actionMvenda(){
+        if (Yii::$app->user->isGuest){
+            return $this->render('index');
+        }else{
+            $searchModelVenda = new VendaSearch();
+            $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
+
+            return $this->render('mVendas', [
+                'searchModelVenda' => $searchModelVenda,
+                'dataProviderVenda' => $dataProviderVenda,
+            ]);
+        }
+    }
+
+
+    public function actionError(){
+        return $this->render('error');
     }
 
     /**

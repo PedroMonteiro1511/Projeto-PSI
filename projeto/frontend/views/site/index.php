@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+
 $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
@@ -17,22 +19,27 @@ $this->title = 'My Yii Application';
 
         <div class="row">
 
-            <div class="col-lg-4">
+            <div align="center" class="col-lg-offset-4">
                 <h2>Artigos</h2>
 
-                <p>Começa já a vender, comprar e trocar os teus produtos favoritos.</p>
+                <p>Começa a explorar todos os artigos disponiveis no site.</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://projeto-frontend.test/index.php?r=produto%2Findex">Ver artigos &raquo;</a></p>
+                <p><?= Html::a('Ver Vendas', ['venda/index'], ['class' => 'btn btn-outline-secondary']) ?></p>
             </div>
-            <div class="col-lg-2">
+
+            <div class="col-lg-3">
+
+
 
             </div>
-            <div class="col-lg-4">
+
+            <div align="center" class="col-lg-offset-4">
                 <h2>Leilões</h2>
 
-                <p>Leiloar ...</p>
+                <p>Começa já a participar em leilões de diversos artigos.</p>
 
-                <p><a class="btn btn-outline-secondary" href="http://projeto-frontend.test/index.php?r=leilao%2Findex">Ver Leilões&raquo;</a></p>
+                <p><?= Html::a('Ver Leilões', ['leilao/index'], ['class' => 'btn btn-outline-secondary']) ?></p>
+
             </div>
         </div>
 
