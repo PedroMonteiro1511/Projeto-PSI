@@ -85,6 +85,8 @@ class Leilao extends \yii\db\ActiveRecord
         ];
     }
 
+
+
     /**
      * Gets query for [[IdUser0]].
      *
@@ -94,4 +96,6 @@ class Leilao extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'idUser']);
     }
+
+
 }

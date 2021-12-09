@@ -2,10 +2,13 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 
 $this->title = 'Leilões';
 $this->params['breadcrumbs'][] = $this->title;
@@ -29,9 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             //'aprovado',
 
             ['class' => 'yii\grid\ActionColumn',
-                'template' =>'{view}'
+                'template' =>'{view}',
             ]
         ],
     ]);  ?>
+
 
 </div>

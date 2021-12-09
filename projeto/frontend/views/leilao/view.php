@@ -20,14 +20,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?php
 
-        $userid = Yii::$app->getUser()->id;
-
         if (Yii::$app->getUser()->id == $model->idUser){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
             <?=        // If true
             Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
             ?>
-
             <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
@@ -39,9 +36,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php
 
 
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser ){ ?>
+        <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
+        <?php
         }  // FIM DO IF
         ?>
     </p>
+
+    <?php
+    if (Yii::$app->getUser()->id == $model->idUser){
+        ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -55,6 +61,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'aprovado',
         ],
     ]) ?>
+    <?php
+    } else {
+
+    ?>
+        <?= DetailView::widget([
+        'model' => $model,
+        'attributes' => [
+            'titulo',
+            'descricao:ntext',
+            'datalimite',
+            'precobase',
+        ],
+    ]) ?>
+
+    <?php
+    }
+    ?>
 
 
 

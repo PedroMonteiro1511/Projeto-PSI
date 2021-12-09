@@ -12,9 +12,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idleilao')->textInput() ?>
 
-    <?= $form->field($model, 'iduser')->textInput() ?>
 
     <?= $form->field($model, 'montante')->textInput(['maxlength' => true]) ?>
 

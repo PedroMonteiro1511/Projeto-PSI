@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 24-Nov-2021 às 10:32
+-- Tempo de geração: 09-Dez-2021 às 11:45
 -- Versão do servidor: 5.7.31
 -- versão do PHP: 7.3.21
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `psiprojeto`
+-- Banco de dados: `yii2advanced`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('gestor', '2', NULL),
+('create-leilao', '24', NULL),
+('delete-profile', '24', NULL),
 ('login-admin', '24', NULL),
 ('login-admin', '27', NULL);
 
@@ -70,7 +71,8 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
-('create-leilao', 1, 'Permite ao utilizador criar um leilão', NULL, NULL, NULL, NULL),
+('create-leilao', 1, 'Utilizador pode criar um leilão', NULL, NULL, NULL, NULL),
+('delete-profile', 1, 'Permite ao utilizador apagar um perfil', NULL, NULL, NULL, NULL),
 ('gestor', 1, 'Utilzadores com role Gestor', NULL, NULL, NULL, NULL),
 ('login-admin', 1, 'Permite a um admin fazer login no backend', NULL, NULL, NULL, NULL);
 
@@ -93,6 +95,7 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('delete-profile', 'login-admin'),
 ('gestor', 'login-admin');
 
 -- --------------------------------------------------------
@@ -127,14 +130,44 @@ CREATE TABLE IF NOT EXISTS `leilao` (
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilao`
 --
 
 INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `aprovado`) VALUES
-(1, 27, 'leilao1', 'Leilao1', '2021-11-24 09:51:46', '437', 'N');
+(1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', 'S'),
+(2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', 'S'),
+(3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', 'N'),
+(4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', 'N'),
+(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `leilaooferta`
+--
+
+DROP TABLE IF EXISTS `leilaooferta`;
+CREATE TABLE IF NOT EXISTS `leilaooferta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idleilao` int(11) NOT NULL,
+  `iduser` int(11) NOT NULL,
+  `dataoferta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `montante` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idleilao` (`idleilao`),
+  KEY `iduser` (`iduser`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `leilaooferta`
+--
+
+INSERT INTO `leilaooferta` (`id`, `idleilao`, `iduser`, `dataoferta`, `montante`) VALUES
+(1, 1, 24, '2021-12-07 12:22:11', '250'),
+(2, 1, 24, '2021-12-09 11:28:33', '257');
 
 -- --------------------------------------------------------
 
@@ -191,9 +224,9 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(24, 'MonteiroAdmin', 'PRDzd184_UxQCHHpXP2okv_0Ver6hXIp', '$2y$13$CYQmpTe1a/uwSx08rmBjguL2GRXxzvBr3IKMTMmWdB.W.V3lB.DK.', NULL, 'Monteiro@gmail.com', 10, '2021-11-17 10:38:16', '2021-11-17 10:38:16', NULL),
+(24, 'MonteiroAdmin', 'PRDzd184_UxQCHHpXP2okv_0Ver6hXIp', '$2y$13$JJk3IDDAAfsbvZT2Bmc.1./7j3J4L41IIAQ.gxjKvotLi.kmVJBw6', NULL, 'Monteiro@gmail.com', 10, '2021-11-17 10:38:16', '2021-11-17 10:38:16', NULL),
 (26, 'Monteiro2', 'l8ngJAer_fRe89itTBY_kuZ71rXfZ7SS', '$2y$13$VsIBZh9mIifQ/gy7cYijJeoTal72W4X43FVST4BgXOikMOrB1cPle', NULL, 'Monteiro2@gmail.com', 10, '2021-11-17 10:57:57', '2021-11-17 10:57:57', '0aKabNfWEVvL7WOv8qmIUhAnAgDY5Skc_1637146677'),
-(27, 'Admin', 'FkJ6_LGo41-dz2rexx9Xm4MWgqRtAl5I', '$2y$13$d5OAJY01UjjhayGfz38AL.7WQdJwBPSQUaE4qtENcAcAdLmxh5Eu.', NULL, 'admin@gmail.com', 10, '2021-11-18 11:43:43', '2021-11-18 11:43:43', 'gmc09aKcNibfdFjQmYWRbDcVO64eP30F_1637235823');
+(27, 'MonteiroADmin2', 'H7x6EEdNSoOrrE9xoWPmW_x4VH1S1qJA', '$2y$13$0fv59F3hPBXKHwevR10Fie9gfgefW9Vi2RlrPKLteXQ2E5Z1H3N92', NULL, 'Monteiroadmin2@outlook.pt', 10, '2021-11-23 12:35:40', '2021-11-23 12:35:40', '1jzkrfPAdDMChJF2VYvQf05KZtVWFndD_1637670940');
 
 -- --------------------------------------------------------
 
@@ -210,7 +243,15 @@ CREATE TABLE IF NOT EXISTS `venda` (
   `preco` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userVenda` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `venda`
+--
+
+INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`) VALUES
+(1, 26, 'Venda1', 'Descrição Venda 1', '450'),
+(2, 24, 'Venda 2', 'Descrição venda 2 ', '500');
 
 --
 -- Restrições para despejos de tabelas
@@ -240,6 +281,13 @@ ALTER TABLE `auth_item_child`
 --
 ALTER TABLE `leilao`
   ADD CONSTRAINT `userLeilao` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
+
+--
+-- Limitadores para a tabela `leilaooferta`
+--
+ALTER TABLE `leilaooferta`
+  ADD CONSTRAINT `leilaooferta_ibfk_1` FOREIGN KEY (`idleilao`) REFERENCES `leilao` (`id`),
+  ADD CONSTRAINT `leilaooferta_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`);
 
 --
 -- Limitadores para a tabela `venda`

@@ -36,6 +36,7 @@ class Oferta extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) {
             if ($this->isNewRecord) {
                 $this->iduser = \Yii::$app->getUser()->id;
+                $this->idleilao = $_GET['id'];
             }
             return true;
         }
@@ -48,7 +49,7 @@ class Oferta extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idleilao', 'iduser', 'montante'], 'required'],
+            [['montante'], 'required'],
             [['idleilao', 'iduser'], 'integer'],
             [['dataoferta'], 'safe'],
             [['montante'], 'number'],
