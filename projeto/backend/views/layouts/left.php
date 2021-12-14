@@ -40,8 +40,7 @@ use yii\bootstrap\Nav;
                         'label' => '<span class="fa fa-angle-down"></span><span class="text-info">Menu Yii2</span>',
                         'url' => '#'
                     ],
-                    ['label' => '<span class="fa fa-file-code-o"></span> Utilizadores', 'url' => ['/user/index']],
-                    ['label' => '<span class="fa fa-file-code-o"></span> Vendas', 'url' => ['/site/venda']],
+                    ['label' => '<span class="fa fa-file-code-o"></span> Gii', 'url' => ['/gii']],
                     ['label' => '<span class="fa fa-dashboard"></span> Debug', 'url' => ['/debug']],
                 ],
             ]
