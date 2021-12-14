@@ -18,9 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+
         <?php
 
-        if (Yii::$app->getUser()->id == $model->idUser){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
+        $data1 = gmdate('Y-m-d h:i:s \G\M\T');
+        $data2 = $model->datalimite;
+
+        if (Yii::$app->getUser()->id == $model->idUser && $data1<$data2){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
             <?=        // If true
             Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
@@ -38,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         }
 
-        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser ){ ?>
+        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){ ?>
         <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
         <?php
         }  // FIM DO IF

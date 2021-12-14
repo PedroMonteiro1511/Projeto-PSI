@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
+/* @var $model common\models\Leilao */
 /* @var $searchModel common\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

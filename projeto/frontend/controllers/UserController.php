@@ -46,6 +46,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Displays a single User model.
      * @param int $id ID
@@ -55,6 +62,13 @@ class UserController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionError($id)
+    {
+        return $this->render('error', [
             'model' => $this->findModel($id),
         ]);
     }

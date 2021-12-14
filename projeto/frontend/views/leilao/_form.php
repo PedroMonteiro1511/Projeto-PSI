@@ -24,10 +24,8 @@ use dosamigos\datetimepicker\DateTimePicker;
         'pickButtonIcon' => 'glyphicon glyphicon-time',
         'inline' => true,
         'clientOptions' => [
-            'startView' => 2,
             'autoclose' => true,
-            'linkFormat' => 'dd MM yyyy - HH:ii P', // if inline = true
-            // 'format' => 'HH:ii P', // if inline = false
+            'linkFormat' => 'yyyy-mm-dd - HH:ii:ss P',
             'todayBtn' => true
         ]
     ]);?>

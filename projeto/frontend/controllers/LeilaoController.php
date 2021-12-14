@@ -42,13 +42,12 @@ class LeilaoController extends Controller
     public function actionIndex()
     {
             $searchModel = new LeilaoSearch();
-            $dataProvider = $searchModel->search($this->request->queryParams);
+            $dataProvider = $searchModel->searchTempo($this->request->queryParams);
 
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-
     }
 
 

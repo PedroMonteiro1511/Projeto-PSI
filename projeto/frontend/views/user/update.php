@@ -14,8 +14,24 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+    <?php
+
+    if ( Yii::$app->getUser()->id != $model->id){ ?>
+        <?=
+        $this->render('error', [
+            'model' => $model,
+        ]);
+
+        ?>
+        <?php
+    }
+    else { ?>
+        <?=   $this->render('_form', [
+            'model' => $model,
+        ]) ?>
+
+        <?php
+    }
+    ?>
 
 </div>

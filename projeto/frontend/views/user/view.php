@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
+/* @var $form yii\widgets\ActiveForm */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
@@ -14,6 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-view">
 
     <h1 align="center"> Utilizador: <?= Html::encode($model->username) ?></h1>
+
+    <?php
+
+    if (Yii::$app->getUser()->id != $model->id){
+        $this->render('error', [
+            'model' => $model,
+        ]);
+    }
+
+    ?>
 
     <p align="center">
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -39,19 +51,22 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     </style>
 
+
+
     <div style="float:left; margin-right:20px;">
 
-        <label for="id">ID:</label>
-        <input maxlength="true" id="id" type="text" readonly="true" value="<?= $model->id ?>">
-        <br>
-        <label for="username">Username:</label>
-        <input id="username" type="text" readonly="true" value="<?= $model->username ?>">
-        <br>
-        <label for="password">Password:</label>
-        <input id="password" type="text" readonly="true" value="<?= $model->password_hash ?>">
-        <br>
-        <label for="email">Email:</label>
-        <input id="email" type="text" readonly="true" value="<?= $model->email ?>">
+        <?php $form = ActiveForm::begin(); ?>
+
+        <?= $form->field($model, 'id')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
+
+        <?= $form->field($model, 'username')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
+
+
+        <?= $form->field($model, 'password_hash')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true])->label('Password') ?>
+
+        <?= $form->field($model, 'email')->textInput(['size'=>'100%','readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
+
+        <?php ActiveForm::end(); ?>
 
 
     </div>

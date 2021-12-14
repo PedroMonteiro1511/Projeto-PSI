@@ -11,6 +11,18 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 
 AppAsset::register($this);
+$js = <<< 'SCRIPT'
+/* To initialize BS3 tooltips set this below */
+$(function () { 
+    $("[data-toggle='tooltip']").tooltip(); 
+});;
+/* To initialize BS3 popovers set this below */
+$(function () { 
+    $("[data-toggle='popover']").popover(); 
+});
+SCRIPT;
+// Register tooltip/popover initialization javascript
+$this->registerJs($js);
 ?>
 <?php $this->beginPage() ?>
     <!DOCTYPE html>
@@ -21,6 +33,9 @@ AppAsset::register($this);
         <?php $this->registerCsrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
+
+
+       «
     </head>
 <body class="d-flex flex-column h-100">
 <?php $this->beginBody() ?>
@@ -56,7 +71,6 @@ $menuItems = [
                 ]
 
         ];
-        $menuItems[] = ['label' => 'Ofertas', 'url' => ['/oferta/index']];
         $menuItems[] = ['label' => 'Perfil', 'url' => ['/user/view' , 'id'=>Yii::$app->getUser()->id]];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
