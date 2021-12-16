@@ -53,8 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </button>
 
 
-
-
+        <?= \yii\helpers\Html::a( 'Back', Yii::$app->request->referrer, ['class'=>'btn btn-outline-secondary']); ?>
 
         <script type="text/javascript">
             function copytext() {
