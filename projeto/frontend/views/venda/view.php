@@ -49,21 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
-    <?php
-
-    $userid = Yii::$app->getUser()->id;
-
-    if (Yii::$app->getUser()->id != $model->idUser){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
-        ?>
-        <?=        // If true
-        Html::a('⭐ Adicionar aos Favoritos', ['favoritos', 'id' => $model->id], ['class' => 'btn btn-primary']);
-        ?>
-
-        <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
-        <?php
-
-
-    }  // FIM DO IF
-    ?>
+    <?= Html::a('⭐ Adicionar aos Favoritos', ['favoritos', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
+    <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
 
 </div>

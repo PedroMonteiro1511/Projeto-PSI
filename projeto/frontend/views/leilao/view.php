@@ -1,17 +1,14 @@
 <?php
 
-use yii\grid\GridView;
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\OfertaSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $model common\models\Leilao */
 
-$this->title = $model->titulo;
+$this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Leilaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -21,9 +18,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+
         <?php
-        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){?>
-        <?=Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
+
+        $data1 = gmdate('Y-m-d h:i:s \G\M\T');
+        $data2 = $model->datalimite;
+
+        if (Yii::$app->getUser()->id == $model->idUser && $data1<$data2){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
+            ?>
+            <?=        // If true
+            Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            ?>
+            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Are you sure you want to delete this item?',
+                    'method' => 'post',
+                ],
+            ]);
+            ?>
+            <?php
+
+
+        }
+
+        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){ ?>
+        <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
         <?php
         }  // FIM DO IF
         ?>
@@ -36,6 +56,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'id',
+            'idUser',
             'titulo',
             'descricao:ntext',
             'datalimite',
@@ -62,41 +84,6 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 
-
-
-    <?php
-
-    $data1 = gmdate('Y-m-d h:i:s \G\M\T');
-    $data2 = $model->datalimite;
-
-    if (Yii::$app->getUser()->id == $model->idUser){   // Inicio do IF
-    ?>
-        <h1>Ofertas ao seu leilão</h1>
-        <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-                'columns' => [
-                    [
-                    'attribute' => 'Data da oferta',
-                    'value' => 'dataoferta',
-                    ],
-                [
-                    'attribute' => 'Montante Oferecido',
-                    'value' => 'montante',
-                ],
-                    [
-                            'header' => 'Contactar Participante',
-                            'content' =>  function($model){
-                                return Html::a('📞 Contactar', ['user/details','id' => $model->iduser], ['class' => 'btn btn-primary']);
-                            }
-                    ],
-            ],
-
-        ]); ?>
-
-        <?php
-    }
-    // Fim do IF
-    ?>
 
 
 </div>

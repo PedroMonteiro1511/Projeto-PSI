@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use common\models\Leilao;
 use common\models\LeilaoSearch;
 use common\models\Oferta;
-use common\models\OfertaSearch;
+use common\models\OfertaForm;
 use common\models\VendaSearch;
 use Yii;
 use yii\web\Controller;
@@ -41,13 +41,10 @@ class LeilaoController extends Controller
      */
     public function actionIndex()
     {
-        $query = Leilao::find();
-        $leiloes = $query->all();
             $searchModel = new LeilaoSearch();
             $dataProvider = $searchModel->searchTempo($this->request->queryParams);
 
             return $this->render('index', [
-                'leiloes' => $leiloes,
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -79,13 +76,8 @@ class LeilaoController extends Controller
      */
     public function actionView($id)
     {
-        $searchModel = new OfertaSearch();
-        $dataProvider = $searchModel->searchOfertas($this->request->queryParams);
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
 
