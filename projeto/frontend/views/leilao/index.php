@@ -17,25 +17,37 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?php foreach ($leiloes as $leilao): ?>
+
+    <?php
+    $datahoje = new DateTime('now');
+    $datalimite = new DateTime($leilao->datalimite);
+
+    if ($datalimite > $datahoje){
 
 
-  <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'titulo',
-            'descricao:ntext',
-            'datalimite',
-            'precobase',
-            //'aprovado',
+    ?>
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' =>'{view}',
-            ]
-        ],
-    ]);  ?>
+    <div class="card-deck">
+        <div class="card" style="width: 100%; background-color: #D3D3D3; margin-top: 5px ">
+            <img class="card-img-top" src="">
+            <div class="card-body">
+                <h5 class="card-title"><?= $leilao->titulo ?> </h5>
+                <p class="card-text"><?= $leilao->descricao ?></p>
+                <p class="card-text"><small><?= $leilao->datalimite ?></small></p>
+                <p> <?=Html::a('Ver mais...', ['view', 'id' => $leilao->id], ['class' => 'btn btn-primary']); ?> </p>
+            </div>
+        </div>
+    </div>
+
+        <?php
+        }
+
+        ?>
+
+    <?php endforeach; ?>
 
 
 </div>

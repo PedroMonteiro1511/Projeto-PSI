@@ -41,10 +41,14 @@ class LeilaoController extends Controller
      */
     public function actionIndex()
     {
+        $query = Leilao::find();
+        $leiloes = $query->all();
+
             $searchModel = new LeilaoSearch();
             $dataProvider = $searchModel->searchTempo($this->request->queryParams);
 
             return $this->render('index', [
+                'leiloes' => $leiloes,
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
@@ -76,7 +80,11 @@ class LeilaoController extends Controller
      */
     public function actionView($id)
     {
+        $query = Oferta::find();
+        $ofertas = $query->all();
+
         return $this->render('view', [
+            'ofertas' => $ofertas,
             'model' => $this->findModel($id),
         ]);
     }

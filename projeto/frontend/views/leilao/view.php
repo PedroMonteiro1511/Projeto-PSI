@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Leilao */
 
-$this->title = $model->id;
+$this->title = $model->titulo;
 $this->params['breadcrumbs'][] = ['label' => 'Leilaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $data1 = gmdate('Y-m-d h:i:s \G\M\T');
         $data2 = $model->datalimite;
 
-        if (Yii::$app->getUser()->id == $model->idUser && $data1<$data2){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
+        if (Yii::$app->getUser()->id == $model->idUser && $data1>$data2){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
             <?=        // If true
             Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
@@ -56,8 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'idUser',
             'titulo',
             'descricao:ntext',
             'datalimite',
@@ -84,6 +82,67 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 
+    <style>
+        span.separator {
+            border-top: 1px solid #333;
+            width: 100%;
+            height: 1px;
+            display: block;
+        }
+
+        hr{
+            border: 1px solid grey;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid grey;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: lightgrey;
+        }
+    </style>
+    <table>
+        <tr>
+            <th>Data Oferta</th>
+            <th>Montante</th>
+            <th>Participante</th>
+        </tr>
+
+    <?php foreach ($ofertas as $oferta): ?>
+
+
+
+        <?php
+
+        if ($oferta->idleilao == $model->id ){
+
+
+
+            ?>
+
+            <tr>
+                <td> <?= $oferta->dataoferta ?> </td>
+                <td> <?= $oferta->montante ?> </td>
+                <td> <?= Html::a('Contactar participante', ['user/details', 'id' => $oferta->iduser], ['class' => 'btn btn-primary'])?></td>
+            </tr>
+
+            <?php
+        }
+
+        ?>
+
+    <?php endforeach; ?>
+
+        </table>
 
 
 </div>

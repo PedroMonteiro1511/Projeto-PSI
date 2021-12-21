@@ -2,20 +2,16 @@
 
 namespace frontend\controllers;
 
-use common\models\Leilao;
-use common\models\LeilaoSearch;
-use common\models\Venda;
-use common\models\VendaSearch;
-use Yii;
+use common\models\Vendafav;
+use common\models\VendafavSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
 
 /**
- * VendaController implements the CRUD actions for Venda model.
+ * VendafavController implements the CRUD actions for Vendafav model.
  */
-class VendaController extends Controller
+class VendafavController extends Controller
 {
     /**
      * @inheritDoc
@@ -36,57 +32,22 @@ class VendaController extends Controller
     }
 
     /**
-     * Lists all Venda models.
+     * Lists all Vendafav models.
      * @return mixed
      */
     public function actionIndex()
     {
-
-        $searchModel = new VendaSearch();
+        $searchModel = new VendafavSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
-
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-    }
-
-    public function actionIndex1()
-    {
-        $query = Venda::find();
-        $vendas = $query->all();
-        $searchModel = new VendaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index1',[
-            'vendas' => $vendas,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionMvenda(){
-        if (Yii::$app->user->isGuest){
-            return $this->render('index');
-        }else{
-            $searchModelVenda = new VendaSearch();
-            $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
-
-            return $this->render('mVendas', [
-                'searchModelVenda' => $searchModelVenda,
-                'dataProviderVenda' => $dataProviderVenda,
-            ]);
-        }
-    }
-
-
-    public function actionError(){
-        return $this->render('error');
     }
 
     /**
-     * Displays a single Venda model.
+     * Displays a single Vendafav model.
      * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -99,18 +60,16 @@ class VendaController extends Controller
     }
 
     /**
-     * Creates a new Venda model.
+     * Creates a new Vendafav model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Venda();
+        $model = new Vendafav();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())) {
-                $model->imagem = Venda::getInstances($model, 'imagem');
-                $model -> save();
+            if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -123,7 +82,7 @@ class VendaController extends Controller
     }
 
     /**
-     * Updates an existing Venda model.
+     * Updates an existing Vendafav model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return mixed
@@ -143,7 +102,7 @@ class VendaController extends Controller
     }
 
     /**
-     * Deletes an existing Venda model.
+     * Deletes an existing Vendafav model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return mixed
@@ -157,19 +116,18 @@ class VendaController extends Controller
     }
 
     /**
-     * Finds the Venda model based on its primary key value.
+     * Finds the Vendafav model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Venda the loaded model
+     * @return Vendafav the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Venda::findOne($id)) !== null) {
+        if (($model = Vendafav::findOne($id)) !== null) {
             return $model;
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
 }

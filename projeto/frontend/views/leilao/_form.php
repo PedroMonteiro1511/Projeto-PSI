@@ -25,7 +25,7 @@ use dosamigos\datetimepicker\DateTimePicker;
         'inline' => true,
         'clientOptions' => [
             'autoclose' => true,
-            'linkFormat' => 'yyyy-mm-dd - HH:ii:ss P',
+            'linkFormat' => 'yyyy-mm-dd HH:ii:ss P',
             'todayBtn' => true
         ]
     ]);?>

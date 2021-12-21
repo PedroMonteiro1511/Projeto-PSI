@@ -2,6 +2,8 @@
 
 /* @var $this yii\web\View */
 
+use yii\helpers\Html;
+
 $this->title = 'SaleOn';
 ?>
 <div class="site-index">
@@ -22,14 +24,14 @@ $this->title = 'SaleOn';
 
                 <p></p>
 
-                <p><a class="btn btn-outline-secondary" href="http://localhost/projetoteste/backend/web/index.php?r=venda%2Findex">Gerir &raquo;</a></p>
+                <p><?= Html::a('Gerir Vendas', ['venda/index'], ['class' => 'btn btn-success']) ?></p>
             </div>
             <div class="col-lg-4">
                 <h2>Leilões</h2>
 
                 <p></p>
 
-                <p><a class="btn btn-outline-secondary" href="http://localhost/projetoteste/backend/web/index.php?r=leilao%2Findex">Gerir &raquo;</a></p>
+                <p><?= Html::a('Gerir Leilõles', ['leilao//index'], ['class' => 'btn btn-success']) ?></p>
             </div>
             <div class="col-lg-4">
                 <h2>Utilizadores</h2>
