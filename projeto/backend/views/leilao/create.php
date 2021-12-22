@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Leilao */
 
-$this->title = 'Create Leilao';
+$this->title = 'Dados Leilão';
 $this->params['breadcrumbs'][] = ['label' => 'Leilaos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

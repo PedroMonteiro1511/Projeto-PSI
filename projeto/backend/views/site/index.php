@@ -12,35 +12,33 @@ $this->title = 'SaleOn';
         <h1 class="display-4">MenuAdmin!</h1>
 
         <p class="lead"></p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
     </div>
 
     <div class="body-content">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <h2>Vendas</h2>
+            <div class="card-deck">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestão de utilizadores</h5>
+                        <p class="card-text">Gerir todos os utilizadores e adiconar novos.</p>
+                        <p style="text-align:right"><?= Html::a('Ver utilizadores', ['user/index'], ['class' => 'btn btn-default']) ?></p>
+                    </div>
 
-                <p></p>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestão Vendas</h5>
+                        <p class="card-text">É possivel gerir todos os artigos disponivel para vendas e adicionar novos.</p>
+                        <p style="text-align:right"><?= Html::a('ver vendas', ['venda/index'], ['class' => 'btn btn-default']) ?></p>
+                    </div>
 
-                <p><?= Html::a('Gerir Vendas', ['venda/index'], ['class' => 'btn btn-success']) ?></p>
+                </div>
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestão Leilões</h5>
+                        <p class="card-text">Gerir todos os leiloes e adicionar novos</p>
+                        <p style="text-align:right"><?= Html::a('ver leiloes', ['leilao/index'], ['class' => 'btn btn-default']) ?></p>
             </div>
-            <div class="col-lg-4">
-                <h2>Leilões</h2>
-
-                <p></p>
-
-                <p><?= Html::a('Gerir Leilõles', ['leilao//index'], ['class' => 'btn btn-success']) ?></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Utilizadores</h2>
-
-                <p></p>
-
-                <p><a class="btn btn-outline-secondary" href="http://localhost/projetoteste/backend/web/index.php?r=user%2Findex">Gerir</a></p>
-            </div>
-        </div>
-
-    </div>
-</div>

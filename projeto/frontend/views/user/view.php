@@ -28,11 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
     <p align="center">
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Alterar campos', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?php
         if (Yii::$app->user->can('delete-profile')){ ?>
             <?=
-            Html::a('Delete', ['delete', 'id' => $model->id], [
+            Html::a('Apagar', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Are you sure you want to delete this item?',
@@ -57,12 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'id')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
-
         <?= $form->field($model, 'username')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
 
-
-        <?= $form->field($model, 'password_hash')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true])->label('Password') ?>
+        <?= $form->field($model, 'password_hash')->passwordInput(['readonly'=>!$model->isNewRecord,'maxlength' => true])->label('Password') ?>
 
         <?= $form->field($model, 'email')->textInput(['size'=>'100%','readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
 

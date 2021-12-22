@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </style>
 
 
-
     <div style="float:left; margin-right:20px;">
 
 
@@ -51,10 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 ?>
             </button>
-
-
-
-
 
         <script type="text/javascript">
             function copytext() {

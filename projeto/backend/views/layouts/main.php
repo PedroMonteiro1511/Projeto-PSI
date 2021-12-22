@@ -35,11 +35,21 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Página inicial', 'url' => ['/site/index']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = [
+
+            'label' => 'Gestão', 'items' =>
+                [
+                    ['label' => 'Gerir Leilões', 'url' => ['/leilao/index']],
+                    ['label' => 'Ginhas Vendas', 'url' => ['/venda/index']],
+                    ['label' => 'Gerir Utilizadores', 'url' => ['/user/index']]
+                ]
+
+        ];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(

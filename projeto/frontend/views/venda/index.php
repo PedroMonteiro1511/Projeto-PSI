@@ -14,25 +14,28 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+</div>
+<?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+<div class="container">
+    <div class="row">
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
+        <?php foreach ($vendas as $venda): ?>
+        <div class="card-deck" style="width: 100%">
+            <div class="card" >
+                <img class="card-img-top"><?= $venda->imagem ?>
+                <div class="card-body">
+                    <h5 class="card-title"><?= $venda->titulo ?></h5>
+                    <p class="card-text"><?= $venda->descricao ?></p>
+                    <p class="card-text" style="text-align: right"><?= $venda->preco ?>€</p>
+                    <?= Html::a('Ver', ['view', 'id' => $venda->id], ['class' => 'btn btn-primary'])?>
+                    <div class="btFavorito" style="float: right;"  <?= Html::a('⭐', ['user', 'id' => $venda->id], ['class' => 'btn btn-default'])?></div>
+            </div>
+        </div>
+    </div>
 
-            'titulo',
-            'descricao:ntext',
-            'preco',
-            'imagem',
+    <?php endforeach;?>
 
-            ['class' => 'yii\grid\ActionColumn',
-            'template' =>'{view}'
-                ]
-        ],
-    ]); ?>
-
-
-
+</div>
 </div>
 

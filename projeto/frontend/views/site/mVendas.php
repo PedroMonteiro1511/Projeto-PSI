@@ -14,9 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <p>
-    <?= Html::a('Adicionar um leilão', ['create'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Criar Leilão', ['create'], ['class' => 'btn btn-success']) ?>
 
-    <?= Html::a('Adicionar uma Venda', ['vendas'], ['class' => 'btn btn-success']) ?>
+    <?= Html::a('Criar Venda', ['vendas'], ['class' => 'btn btn-success']) ?>
 </p>
 
 

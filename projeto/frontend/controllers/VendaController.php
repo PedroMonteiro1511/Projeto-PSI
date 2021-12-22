@@ -44,27 +44,17 @@ class VendaController extends Controller
 
         $searchModel = new VendaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $query = Venda::find();
+        $vendas = $query->all();
 
         return $this->render('index', [
 
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    public function actionIndex1()
-    {
-        $query = Venda::find();
-        $vendas = $query->all();
-        $searchModel = new VendaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index1',[
             'vendas' => $vendas,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
+
 
     public function actionMvenda(){
         if (Yii::$app->user->isGuest){

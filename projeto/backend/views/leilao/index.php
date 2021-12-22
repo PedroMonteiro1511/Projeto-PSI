@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Leilaos';
+$this->title = 'Leilões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="leilao-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Leilao', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Novo Leilão', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
