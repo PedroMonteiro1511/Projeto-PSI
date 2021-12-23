@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 09-Dez-2021 às 11:45
--- Versão do servidor: 5.7.31
--- versão do PHP: 7.3.21
+-- Tempo de geração: 23-Dez-2021 às 16:03
+-- Versão do servidor: 10.4.10-MariaDB
+-- versão do PHP: 7.4.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,9 +42,10 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
+('admin', '24', NULL),
 ('create-leilao', '24', NULL),
 ('delete-profile', '24', NULL),
-('login-admin', '24', NULL),
+('gestor', '28', NULL),
 ('login-admin', '27', NULL);
 
 -- --------------------------------------------------------
@@ -56,9 +58,9 @@ DROP TABLE IF EXISTS `auth_item`;
 CREATE TABLE IF NOT EXISTS `auth_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` smallint(6) NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
+  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
   `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` blob,
+  `data` blob DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`),
@@ -71,8 +73,10 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 --
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+('admin', 1, 'Permite o admin fazer login em zonas restritas aos administradores do site', NULL, NULL, NULL, NULL),
 ('create-leilao', 1, 'Utilizador pode criar um leilão', NULL, NULL, NULL, NULL),
 ('delete-profile', 1, 'Permite ao utilizador apagar um perfil', NULL, NULL, NULL, NULL),
+('gerir-leiloes', 1, 'Permite aos Gestores gerir os leilões ainda nao aprovados', NULL, NULL, NULL, NULL),
 ('gestor', 1, 'Utilzadores com role Gestor', NULL, NULL, NULL, NULL),
 ('login-admin', 1, 'Permite a um admin fazer login no backend', NULL, NULL, NULL, NULL);
 
@@ -95,7 +99,9 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
 --
 
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+('admin', 'login-admin'),
 ('delete-profile', 'login-admin'),
+('gestor', 'gerir-leiloes'),
 ('gestor', 'login-admin');
 
 -- --------------------------------------------------------
@@ -107,7 +113,7 @@ INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 DROP TABLE IF EXISTS `auth_rule`;
 CREATE TABLE IF NOT EXISTS `auth_rule` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `data` blob,
+  `data` blob DEFAULT NULL,
   `created_at` int(11) DEFAULT NULL,
   `updated_at` int(11) DEFAULT NULL,
   PRIMARY KEY (`name`)
@@ -130,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `leilao` (
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilao`
@@ -141,7 +147,10 @@ INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `prec
 (2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', 'S'),
 (3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', 'N'),
 (4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', 'N'),
-(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N');
+(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N'),
+(6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', 'N'),
+(7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', 'N'),
+(8, 27, 'Relógio', 'Relógio', '2021-12-31 00:00:26', '1250', 'S');
 
 -- --------------------------------------------------------
 
@@ -154,12 +163,12 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idleilao` int(11) NOT NULL,
   `iduser` int(11) NOT NULL,
-  `dataoferta` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dataoferta` timestamp NOT NULL DEFAULT current_timestamp(),
   `montante` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idleilao` (`idleilao`),
   KEY `iduser` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilaooferta`
@@ -167,7 +176,8 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
 
 INSERT INTO `leilaooferta` (`id`, `idleilao`, `iduser`, `dataoferta`, `montante`) VALUES
 (1, 1, 24, '2021-12-07 12:22:11', '250'),
-(2, 1, 24, '2021-12-09 11:28:33', '257');
+(2, 1, 24, '2021-12-09 11:28:33', '257'),
+(3, 6, 27, '2021-12-21 13:15:56', '1250');
 
 -- --------------------------------------------------------
 
@@ -209,15 +219,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password_hash` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password_reset_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `status` smallint(6) NOT NULL DEFAULT '10',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` smallint(6) NOT NULL DEFAULT 10,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `verification_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
@@ -226,7 +236,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
 (24, 'MonteiroAdmin', 'PRDzd184_UxQCHHpXP2okv_0Ver6hXIp', '$2y$13$JJk3IDDAAfsbvZT2Bmc.1./7j3J4L41IIAQ.gxjKvotLi.kmVJBw6', NULL, 'Monteiro@gmail.com', 10, '2021-11-17 10:38:16', '2021-11-17 10:38:16', NULL),
 (26, 'Monteiro2', 'l8ngJAer_fRe89itTBY_kuZ71rXfZ7SS', '$2y$13$VsIBZh9mIifQ/gy7cYijJeoTal72W4X43FVST4BgXOikMOrB1cPle', NULL, 'Monteiro2@gmail.com', 10, '2021-11-17 10:57:57', '2021-11-17 10:57:57', '0aKabNfWEVvL7WOv8qmIUhAnAgDY5Skc_1637146677'),
-(27, 'MonteiroADmin2', 'H7x6EEdNSoOrrE9xoWPmW_x4VH1S1qJA', '$2y$13$0fv59F3hPBXKHwevR10Fie9gfgefW9Vi2RlrPKLteXQ2E5Z1H3N92', NULL, 'Monteiroadmin2@outlook.pt', 10, '2021-11-23 12:35:40', '2021-11-23 12:35:40', '1jzkrfPAdDMChJF2VYvQf05KZtVWFndD_1637670940');
+(27, 'MonteiroADmin2', 'H7x6EEdNSoOrrE9xoWPmW_x4VH1S1qJA', '$2y$13$0fv59F3hPBXKHwevR10Fie9gfgefW9Vi2RlrPKLteXQ2E5Z1H3N92', NULL, 'Monteiroadmin2@outlook.pt', 10, '2021-11-23 12:35:40', '2021-11-23 12:35:40', '1jzkrfPAdDMChJF2VYvQf05KZtVWFndD_1637670940'),
+(28, 'MonteiroGestor', 'su4JlGrGyRqFOX8vtADflAR6lq8DIEnx', '$2y$13$aCIn76XAhYMBPhYZHjRgQ.6Wtg4u6Ha6uERqJGOSBHft2E9SM5L1e', NULL, 'MonteiroGestor@hotmail.com', 10, '2021-12-23 15:14:36', '2021-12-23 15:14:36', 'XS44JseTC3W2t0zst2NTTHJHUSIsxENz_1640272476');
 
 -- --------------------------------------------------------
 
