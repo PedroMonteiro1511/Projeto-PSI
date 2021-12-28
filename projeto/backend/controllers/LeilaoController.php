@@ -47,6 +47,22 @@ class LeilaoController extends Controller
         ]);
     }
 
+    public function actionIndexap()
+    {
+        $query = Leilao::find();
+        $leiloes = $query->all();
+
+
+        $searchModel = new LeilaoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexap', [
+            'leiloes' => $leiloes,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Displays a single Leilao model.
      * @param int $id ID
@@ -100,6 +116,34 @@ class LeilaoController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionUpdateaprovado($id)
+    {
+        $model = $this->findModel($id);
+
+        if ($model->aprovado == 'S'){
+            \Yii::$app->db->createCommand()
+                ->update('leilao', ['aprovado' => 'N'], 'id = '. $model->id)
+                ->execute();
+        }elseif ($model->aprovado == 'N'){
+            \Yii::$app->db->createCommand()
+                ->update('leilao', ['aprovado' => 'S'], 'id = '. $model->id)
+                ->execute();
+        }
+
+        $query = Leilao::find();
+        $leiloes = $query->all();
+
+        $searchModel = new LeilaoSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
+        return $this->render('indexap', [
+            'leiloes' => $leiloes,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
     }
 
     /**

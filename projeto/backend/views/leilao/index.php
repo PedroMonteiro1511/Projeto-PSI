@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'titulo',
             'descricao:ntext',
             'datalimite',
-            //'precobase',
-            //'aprovado',
+            'precobase',
+            'aprovado',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
