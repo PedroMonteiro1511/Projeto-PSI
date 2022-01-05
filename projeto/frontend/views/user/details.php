@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1 align="center"> Utilizador: <?= Html::encode($model->username) ?></h1>
 
-    </p>
 
     <style>
         input, label {
@@ -26,45 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
         }
     </style>
 
+</div>
 
-    <div style="float:left; margin-right:20px;">
+<script type="text/javascript">
+    function copytext() {
+        var copyText = "<?php echo $model->email; ?>";
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(copyText.value);
+    }
+</script>
 
-
-        <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'username')->textInput(['readonly'=>!$model->isNewRecord,'maxlength' => true]) ?>
-
-        <?= $form->field($model, 'email')->textInput(['size'=>'100%','readonly'=>!$model->isNewRecord,'maxlength' => true,'id'=>'email']) ?>
-
-
-            <button class="btn btn-primary" onclick="copytext()">
-                <?php
-
-                echo Html::tag('span','Copiar Email ✉',[
-                    'title'=>'Email Copiado',
-                    'data-toggle'=>'popover',
-                    'data-content'=>'O email foi copiado para a sua clipboard' ,
-                    'style'=> 'cursor:pointer;',
-                    'id' => 'email'
-                ]);
-
-                ?>
-            </button>
-
-        <script type="text/javascript">
-            function copytext() {
-                var copyText = document.getElementById("email");
-                copyText.select();
-                copyText.setSelectionRange(0, 99999);
-                navigator.clipboard.writeText(copyText.value);
-            }
-        </script>
-
-        <?php ActiveForm::end(); ?>
-
-
+<div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+    <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" /></button> <span class="name mt-3"> Nome : <?= $model->username ?></span> <span class="idd"></span>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1"> Email para contacto : <?= $model->email ?></span> <span><i class="fa fa-copy"></i></span> </div>
+            <div class="d-flex flex-row justify-content-center align-items-center mt-3"> <span class="number"> <span class="follow"></span></span> </div>
+            <div class=" d-flex mt-2"></div>
+            <div class=" px-2 rounded mt-4 date "> <span class="join">Utilizador Registado desde:  <?= $model->created_at ?></span> </div>
+        </div>
     </div>
-
-
-
 </div>

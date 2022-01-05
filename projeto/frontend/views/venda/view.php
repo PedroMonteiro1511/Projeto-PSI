@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         if (Yii::$app->getUser()->id == $model->idUser){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
-        <?=        // If true
+            <?=        // If true
             Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
             ?>
 
@@ -33,23 +33,37 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             ]);
             ?>
-       <?php
+            <?php
 
 
         }  // FIM DO IF
         ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            'descricao:ntext',
-            'preco',
-        ],
-    ]) ?>
 
-    <?= Html::a('⭐ Adicionar aos Favoritos', ['favoritos', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
-    <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"><?= $model->titulo ?></h3>
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-6">
+                        <div class="white-box text-center" form><img src="<?= $model->imagem ?>" class="img-responsive"></div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-6">
+                        <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
+                        <p><?= $model->descricao ?></p>
+                        <h2 class="mt-5">
+                            <?= $model->preco ?>  €<small class="text-success"></small>
+                        </h2>
+
+                        <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

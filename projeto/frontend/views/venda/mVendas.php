@@ -29,6 +29,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'titulo',
         'descricao:ntext',
         'preco',
+        [
+                'label' =>'Imagem',
+                 'attribute' =>'imagem',
+                 'format' => 'html',
+                 'value' => function($model){
+                    return yii\bootstrap\Html::img($model->imagem,['width' => '150']);
+
+                 }
+        ],
+
         //'aprovado',
 
         ['class' => 'yii\grid\ActionColumn'],

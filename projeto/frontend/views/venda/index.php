@@ -14,28 +14,38 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-</div>
-<?php echo $this->render('_search', ['model' => $searchModel]); ?>
+    <section class="sections random-product">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
 
-<div class="container">
-    <div class="row">
+                    <?php foreach ($vendas as $venda): ?>
 
-        <?php foreach ($vendas as $venda): ?>
-        <div class="card-deck" style="width: 100%">
-            <div class="card" >
-                <img class="card-img-top"><?= $venda->imagem ?>
-                <div class="card-body">
-                    <h5 class="card-title"><?= $venda->titulo ?></h5>
-                    <p class="card-text"><?= $venda->descricao ?></p>
-                    <p class="card-text" style="text-align: right"><?= $venda->preco ?>€</p>
-                    <?= Html::a('Ver', ['view', 'id' => $venda->id], ['class' => 'btn btn-primary'])?>
-                    <div class="btFavorito" style="float: right;"  <?= Html::a('⭐', ['user', 'id' => $venda->id], ['class' => 'btn btn-default'])?></div>
-            </div>
-        </div>
-    </div>
+                        <div class="col-md-4">
+                            <div class="card" style="margin-bottom: 5px;">
+                                <img class="card-img-top" src="<?= $venda->imagem ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <?= $venda->titulo ?>
+                                    </h5>
+                                </div>
+                                <div class="card-footer">
+                                    <p> <?=Html::a('<b>Ver mais...</b>', ['view', 'id' => $venda->id], ['class' => 'badge badge float-right']); ?> </p>
+                                    <div class="float-left">
+                                        <a class="text-danger"><?= $venda->descricao ?></a>
+                                        <br>
+                                        <small class="text-muted">Preço: <b><?= $venda->preco ?> €</b></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--.col-->
 
-    <?php endforeach;?>
+                    <?php endforeach; ?>
 
-</div>
+
+                </div><!--.row-->
+            </div><!--.container-->
+        </div><!--.container-fluid-->
+    </section>
 </div>
 
