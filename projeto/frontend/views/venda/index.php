@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?php foreach ($vendas as $venda): ?>
 
+
                             <div class="col-md-4">
                                 <div class="card" style="margin-bottom: 5px;">
                                     <img class="card-img-top" src="http://www.mihanmedia.ir/userfile/736708307-580x567.jpg" alt="Card image cap">
@@ -49,6 +50,25 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </div>
                                 </div>
                             </div><!--.col-->
+
+                        <div class="col-md-4">
+                            <div class="card" style="margin-bottom: 5px;">
+                                <img class="card-img-top" src="<?= $venda->imagem ?>">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <?= $venda->titulo ?>
+                                    </h5>
+                                </div>
+                                <div class="card-footer">
+                                    <p> <?=Html::a('<b>Ver mais...</b>', ['view', 'id' => $venda->id], ['class' => 'badge badge float-right']); ?> </p>
+                                    <div class="float-left">
+                                        <a class="text-danger"><?= $venda->descricao ?></a>
+                                        <br>
+                                        <small class="text-muted">Preço: <b><?= $venda->preco ?> €</b></small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--.col-->
 
                     <?php endforeach; ?>
 

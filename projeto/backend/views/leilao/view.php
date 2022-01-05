@@ -43,6 +43,15 @@ $this->params['breadcrumbs'][] = $this->title;
         }
 ?>
 
+
+        <?= Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Tem a certeza que deseja apagar?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </p>
 
     <?php

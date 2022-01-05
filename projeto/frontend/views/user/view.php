@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     ?>
 
-
     <style>
         input, label {
             display:block;
@@ -84,6 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
+
                             </div>
                             <div class="row">
                                 <div class="col-sm-3"></div>
@@ -103,6 +103,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ?>
 
                                 </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-3"></div>
+                            <div class="col-sm-9 text-secondary">
+                                <?= Html::a('Alterar campos', ['update', 'id' => $model->id], ['class' => 'btn btn-primary px-4']) ?>
+                                <?php
+                                if (Yii::$app->user->can('delete-profile')){ ?>
+                                    <?=
+                                    Html::a('Apagar', ['delete', 'id' => $model->id], [
+                                        'class' => 'btn btn-danger',
+                                        'data' => [
+                                            'confirm' => 'Are you sure you want to delete this item?',
+                                            'method' => 'post',
+                                        ],
+                                    ]);
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -110,7 +128,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
     </div>
-
-
+</div>
 
 </div>

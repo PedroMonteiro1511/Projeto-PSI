@@ -2,8 +2,6 @@
 
 namespace frontend\controllers;
 
-use common\models\Leilao;
-use common\models\LeilaoSearch;
 use common\models\Venda;
 use common\models\VendaSearch;
 use Yii;
@@ -102,8 +100,15 @@ class VendaController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->imagem = Venda::getInstances($model, 'imagem');
+
+                $model->imagem = UploadedFile::getInstance($model, 'imagem');
+                $imagem_nome = $model->titulo.rand(1, 4000).'.'.$model->imagem->extension;
+                $path = 'uploads/venda' .$imagem_nome;
+
+                $model->imagem->saveAs($path);
+                $model->imagem = $path;
                 $model -> save();
+
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -114,6 +119,7 @@ class VendaController extends Controller
             'model' => $model,
         ]);
     }
+
 
     /**
      * Updates an existing Venda model.
