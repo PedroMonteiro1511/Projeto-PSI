@@ -81,7 +81,8 @@ outro com id:3 username:Monteiro.
         -Apagar uma Venda.
       
   Funcionais: 2 BACKEND
-      -LoginBackendCest  -- php vendor/bin/codecept run functional LoginBackendCest -c -backend
+  
+     -LoginBackendCest  -- php vendor/bin/codecept run functional LoginBackendCest -c -backend
       Testes para:
         -Login com utilizador admin (Login Works)
         -Login com utilizador nao autorizado a aceder ao backend (LoginFails)
