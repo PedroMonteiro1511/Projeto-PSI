@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/spec" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/2amigos/yii2-date-time-picker-widget" />
+      <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/almasaeed2010/adminlte" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/behat/gherkin" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/bower-asset/admin-lte" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/bower-asset/bootstrap" />
@@ -33,6 +34,8 @@
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/ezyang/htmlpurifier" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/fakerphp/faker" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/guzzlehttp/psr7" />
+      <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/hail812/yii2-adminlte-widgets" />
+      <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/hail812/yii2-adminlte3" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/myclabs/deep-copy" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/npm-asset/bootstrap" />
       <excludeFolder url="file://$MODULE_DIR$/projeto/vendor/opis/closure" />

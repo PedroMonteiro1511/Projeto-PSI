@@ -68,21 +68,7 @@ class LeilaoController extends Controller
         ]);
     }
 
-    public function actionIndexap()
-    {
-        $query = Leilao::find();
-        $leiloes = $query->all();
 
-
-        $searchModel = new LeilaoSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('indexap', [
-            'leiloes' => $leiloes,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
 
     /**
      * Displays a single Leilao model.

@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "leilao".
@@ -12,6 +13,7 @@ use Yii;
  * @property string $titulo
  * @property string $descricao
  * @property string $datalimite
+ * @property string $imagem
  * @property float $precobase
  * @property string $aprovado
  *
@@ -56,6 +58,7 @@ class Leilao extends \yii\db\ActiveRecord
             [['datalimite'], 'safe'],
             [['precobase'], 'number'],
             [['titulo'], 'string', 'max' => 50],
+            [['imagem'], 'file','extensions' => 'png, jpg'],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],
         ];
     }
@@ -81,11 +84,10 @@ class Leilao extends \yii\db\ActiveRecord
             'descricao' => 'Descricao',
             'datalimite' => 'Datalimite',
             'precobase' => 'Precobase',
+            'imagem' => 'Imagem',
             'aprovado' => 'Aprovado',
         ];
     }
-
-
 
     /**
      * Gets query for [[IdUser0]].

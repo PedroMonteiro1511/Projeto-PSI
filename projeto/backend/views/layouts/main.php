@@ -45,7 +45,7 @@ AppAsset::register($this);
             'label' => 'Gestão', 'items' =>
                 [
                     ['label' => 'Gerir Leilões', 'url' => ['/leilao/index']],
-                    ['label' => 'Ginhas Vendas', 'url' => ['/venda/index']],
+                    ['label' => 'Gerir Vendas', 'url' => ['/venda/index']],
                     ['label' => 'Gerir Utilizadores', 'url' => ['/user/index']]
                 ]
 

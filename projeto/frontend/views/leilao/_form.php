@@ -21,7 +21,7 @@ use dosamigos\datetimepicker\DateTimePicker;
 
   <div class="leilao-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <?= $form->field($model, 'titulo')->textInput(['placeholder' => Yii::t('app', 'Titulo') ])->label('Titulo') ?>
 
@@ -41,6 +41,8 @@ use dosamigos\datetimepicker\DateTimePicker;
     ]);?>
 
     <?= $form->field($model, 'precobase')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'imagem')->fileInput()->label('Inserir imagem') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

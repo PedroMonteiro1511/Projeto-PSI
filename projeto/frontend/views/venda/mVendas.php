@@ -195,10 +195,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-5">
-                        <h2>Meus <b>Leilões</b></h2>
+                        <h2>Minhas <b>Vendas</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <?= Html::a('<i class="material-icons">&#xE147;</i><span>Adicionar um leilão</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+                        <?= Html::a('<i class="material-icons">&#xE147;</i><span>Adicionar uma Venda</span>', ['create'], ['class' => 'btn btn-secondary'])?>
                     </div>
                 </div>
             </div>

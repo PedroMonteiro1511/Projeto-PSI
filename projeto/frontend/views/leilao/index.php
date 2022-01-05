@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="col-md-4">
             <div class="card" style="margin-bottom: 5px;">
-                <img class="card-img-top" src="http://www.mihanmedia.ir/userfile/736708307-580x567.jpg" alt="Card image cap">
+                <img class="card-img-top" src="<?= $leilao->imagem ?>" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">
                         <?= $leilao->titulo ?>

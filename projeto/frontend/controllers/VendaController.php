@@ -132,7 +132,15 @@ class VendaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->imagem = UploadedFile::getInstance($model, 'imagem');
+            $imagem_nome = $model->titulo.rand(1, 4000).'.'.$model->imagem->extension;
+            $path = 'uploads/venda' .$imagem_nome;
+
+            $model->imagem->saveAs($path);
+            $model->imagem = $path;
+            $model -> save();
+
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

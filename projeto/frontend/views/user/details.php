@@ -15,21 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 
-    <h1 align="center">Detalhes do Utilizador</h1>
-
-    <h1 align="center"><?= Html::encode($model->username) ?></h1>
+    <h1 align="center"> Utilizador: <?= Html::encode($model->username) ?></h1>
 
 
     <style>
         input, label {
             display:block;
             width: 100%;
-        }
-        body {
-            color: #566787;
-            background: #f5f5f5;
-            font-family: 'Varela Round', sans-serif;
-            font-size: 13px;
         }
     </style>
 

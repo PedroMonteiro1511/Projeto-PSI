@@ -41,17 +41,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         }
-?>
+        ?>
 
-
-        <?= Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Tem a certeza que deseja apagar?',
-                'method' => 'post',
-            ],
-        ]) ?>
     </p>
 
     <?php
@@ -72,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
                             <p><?= $model->descricao ?></p>
                             <h2 class="mt-5">
-                               Preço Base: <?= $model->precobase ?> €<small class="text-success"></small>
+                                Preço Base: <?= $model->precobase ?> €<small class="text-success"></small>
                             </h2>
                         </div>
                     </div>
@@ -84,7 +75,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php } else {
 
-    ?>
+        ?>
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
         <div class="container">
@@ -99,12 +90,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
                             <p><?= $model->descricao ?></p>
                             <h2 class="mt-5">
-                               Preço base: <?= $model->precobase ?> €<small class="text-success"></small>
+                                Preço base: <?= $model->precobase ?> €<small class="text-success"></small>
                             </h2>
                             <?php
                             if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){ ?>
-                            <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
-                            <?php
+                                <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
+                                <?php
                             }  // FIM DO IF
                             ?>
                         </div>
@@ -113,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-    <?php
+        <?php
     }
     ?>
 
@@ -158,42 +149,42 @@ $this->params['breadcrumbs'][] = $this->title;
     if ($model->idUser == Yii::$app->getUser()->id){
 
 
-echo '
+        echo '
     <table>
         <tr>
             <th>Data Oferta</th>
             <th>Montante</th>
             <th>Participante</th>
         </tr>';
- ?>
-    <?php foreach ($ofertas as $oferta): ?>
+        ?>
+        <?php foreach ($ofertas as $oferta): ?>
 
 
-
-        <?php
-
-        if ($oferta->idleilao == $model->id ){
-
-
-
-            ?>
-            <tr>
-                <td> <?= $oferta->dataoferta ?> </td>
-                <td> <?= $oferta->montante ?> € </td>
-                <td> <?= Html::a('Contactar participante', ['user/details', 'id' => $oferta->iduser], ['class' => 'btn btn-primary'])?></td>
-            </tr>
 
             <?php
-        }
 
-        ?>
+            if ($oferta->idleilao == $model->id ){
 
-    <?php endforeach; ?>
 
-    <?php
+
+                ?>
+                <tr>
+                    <td> <?= $oferta->dataoferta ?> </td>
+                    <td> <?= $oferta->montante ?> € </td>
+                    <td> <?= Html::a('Contactar participante', ['user/details', 'id' => $oferta->iduser], ['class' => 'btn btn-primary'])?></td>
+                </tr>
+
+                <?php
+            }
+
+            ?>
+
+        <?php endforeach; ?>
+
+        <?php
     }
     ?>
-        </table>
+    </table>
 
 
 </div>

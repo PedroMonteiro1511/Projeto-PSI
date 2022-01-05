@@ -11,6 +11,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * LeilaoController implements the CRUD actions for Leilao model.
@@ -102,7 +103,16 @@ class LeilaoController extends Controller
             $model = new Leilao();
 
             if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
+                if ($model->load($this->request->post())) {
+
+                    $model->imagem = UploadedFile::getInstance($model, 'imagem');
+                    $imagem_nome = $model->titulo.rand(1, 4000).'.'.$model->imagem->extension;
+                    $path = 'uploads/venda' .$imagem_nome;
+
+                    $model->imagem->saveAs($path);
+                    $model->imagem = $path;
+                    $model -> save();
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {

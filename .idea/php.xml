@@ -96,6 +96,9 @@
       <path value="$PROJECT_DIR$/projeto/vendor/symfony/service-contracts" />
       <path value="$PROJECT_DIR$/projeto/vendor/bower-asset/smalot-bootstrap-datetimepicker" />
       <path value="$PROJECT_DIR$/projeto/vendor/2amigos/yii2-date-time-picker-widget" />
+      <path value="$PROJECT_DIR$/projeto/vendor/hail812/yii2-adminlte3" />
+      <path value="$PROJECT_DIR$/projeto/vendor/hail812/yii2-adminlte-widgets" />
+      <path value="$PROJECT_DIR$/projeto/vendor/almasaeed2010/adminlte" />
     </include_path>
   </component>
 </project>
