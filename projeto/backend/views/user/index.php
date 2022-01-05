@@ -205,6 +205,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-sm-5">
                             <h2>Painel de <b>Utilizadores</b></h2>
                         </div>
+                        <div class="col-sm-7">
+                            <?= Html::a('<span>Adicionar um Utilizador</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+                        </div>
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
@@ -226,7 +229,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td>
                                     <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['user/view', 'id' => $user->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
                                     <?= Html::a('<i class="material-icons">sync</i>', ['user/update', 'id' => $user->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">delete</i>', ['user/delete', 'id' => $user->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
+                                    <?= Html::a('<i class="material-icons">delete</i>', ['user/delete', 'id' => $user->id], ['class' => 'delete','title'=>'Apagar','data' => ['method' => 'post'], 'data-toggle'=>'tooltip']); ?>
                                 </td>
 
                     <?php endforeach; ?>

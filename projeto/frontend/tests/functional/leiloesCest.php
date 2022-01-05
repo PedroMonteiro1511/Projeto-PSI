@@ -25,7 +25,44 @@ class leiloesCest
         $I->click('Save');
         $I->see('Update');
         $I->see('Delete');
-        $I->amOnPage('index-test.php?r=oferta%2Fview&id=10');
+    }
+
+    public function CriarLeilao(FunctionalTester $I)
+    {
+        $I->click('Meus Leilões');
+        $I->see('Adicionar um leilão');
+        $I->click('Adicionar um leilão');
+        $I->see('Create Leilao');
+        $I->fillField('Titulo','Leilao1');
+        $I->fillField('Descrição','DescricaoLeilao1');
+        $I->fillField('Preço',4350);
+        $I->fillField('Data',date('now'));
+        $I->attachFile('Imagem','overlay.png');
+        $I->click('Save');
+        $I->see('Leilao1','h1');
+    }
+
+    public function AlterarLeilao(FunctionalTester $I)
+    {
+        $I->click('Meus Leilões');
+        $I->click('Mais Informações');
+        $I->see('Update');
+        $I->click('Update');
+        $I->fillField('Titulo','LeilaoTeste');
+        $I->fillField('Descrição','LeilaoTeste');
+        $I->fillField('Data',date('now'));
+        $I->fillField('Preço',3500);
+        $I->attachFile('Imagem','overlay.png');
+        $I->click('Save');
+    }
+
+    public function ApagarLeilao(FunctionalTester $I)
+    {
+        $I->click('Meus Leilões');
+        $I->click('Mais Informações');
+        $I->see('Delete');
+        $I->click('Delete');
+        $I->amOnPage('leilao/index');
     }
 
 

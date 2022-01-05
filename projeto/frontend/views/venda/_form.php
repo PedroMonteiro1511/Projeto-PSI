@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'preco')->textInput(['maxlength' => true])->label('Preço') ?>
 
-    <?= $form->field($model, 'imagem')->fileInput()->label('Inserir imagem') ?>
+    <?= $form->field($model, 'imagem')->fileInput()->label('Imagem') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Criar', ['class' => 'btn btn-success']) ?>

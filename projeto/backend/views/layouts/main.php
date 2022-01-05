@@ -40,16 +40,17 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Gerir Utilizadores', 'url' => ['/user/index']];
         $menuItems[] = [
 
             'label' => 'Gestão', 'items' =>
                 [
                     ['label' => 'Gerir Leilões', 'url' => ['/leilao/index']],
                     ['label' => 'Gerir Vendas', 'url' => ['/venda/index']],
-                    ['label' => 'Gerir Utilizadores', 'url' => ['/user/index']]
                 ]
 
         ];
+
         if (Yii::$app->user->can('gestor')){
             $menuItems[] = [
 

@@ -46,4 +46,13 @@ class loginCest
         $I->fillField('Password','admin123');
         $I->click('Enter');
     }
+
+    public function LoginIncorrect(FunctionalTester $I)
+    {
+        $I->click('Login');
+        $I->see('Please fill out the following fields to login:');
+        $I->fillField('Username','MonteiroAdmin');
+        $I->fillField('Password','admin1234');
+        $I->dontSee('Logout (MonteiroAdmin)','form button[type=submit]');
+    }
 }

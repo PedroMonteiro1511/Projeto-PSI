@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         if (Yii::$app->getUser()->id == $model->idUser){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
             <?=        // If true
-            Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
+            Html::a('Alterar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary','name' => 'Alterar']);
             ?>
 
             <?= Html::a('Apagar', ['delete', 'id' => $model->id], [
@@ -57,8 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h2 class="mt-5">
                             <?= $model->preco ?>  €<small class="text-success"></small>
                         </h2>
+                        <?php
+                        if (Yii::$app->user->getId() != $model->idUser){
 
+                        ?>
                         <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
+                        <?php } ?>
                     </div>
 
                 </div>

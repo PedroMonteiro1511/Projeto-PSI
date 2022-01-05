@@ -53,23 +53,15 @@ $menuItems = [
         ['label' => 'Página Inicial', 'url' => ['/site/index']],
         ['label' => 'Vendas', 'url' => ['/venda/index']],
         ['label' => 'Leilões', 'url' => ['/leilao/index']],
-
     ];
 
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
+        $menuItems[] = ['label' => 'Meus Leilões', 'url' => ['/leilao/mleilao']];
+        $menuItems[] = ['label' => 'Minhas Vendas', 'url' => ['/venda/mvenda']];
 
-        $menuItems[] = [
-
-            'label' => 'Meus Artigos', 'items' =>
-                [
-                    ['label' => 'Meus leilões', 'url' => ['/leilao/mleilao']],
-                    ['label' => 'Minhas vendas', 'url' => ['/venda/mvenda']]
-                ]
-
-        ];
         $menuItems[] = ['label' => 'Perfil', 'url' => ['/user/view' , 'id'=>Yii::$app->getUser()->id]];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])

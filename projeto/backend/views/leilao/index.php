@@ -233,7 +233,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td>
                                 <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
                                 <?= Html::a('<i class="material-icons">sync</i>', ['leilao/update', 'id' => $leilao->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
-                                <?= Html::a('<i class="material-icons">delete</i>', ['leilao/delete', 'id' => $leilao->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
+                                <?= Html::a('<i class="material-icons">delete</i>', ['leilao/delete', 'id' => $leilao->id], ['class' => 'delete','title'=>'Apagar','data' => ['method' => 'post'], 'data-toggle'=>'tooltip']); ?>
                             </td>
                         </tr>
                 <?php endforeach; ?>

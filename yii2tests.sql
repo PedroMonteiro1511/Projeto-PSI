@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 05-Jan-2022 às 12:39
+-- Tempo de geração: 05-Jan-2022 às 18:35
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.4.0
 
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '24', NULL),
+('admin', '2', NULL),
 ('admin', '27', NULL),
-('gestor', '28', NULL);
+('gestor', '3', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,29 +124,34 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 DROP TABLE IF EXISTS `leilao`;
 CREATE TABLE IF NOT EXISTS `leilao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` int(11) NOT NULL,
+  `idUser` int(11) DEFAULT NULL,
   `titulo` varchar(50) NOT NULL,
   `descricao` text NOT NULL,
   `datalimite` datetime NOT NULL,
   `precobase` decimal(10,0) NOT NULL,
+  `imagem` text DEFAULT NULL,
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilao`
 --
 
-INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `aprovado`) VALUES
-(1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', 'S'),
-(3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', 'N'),
-(4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', 'N'),
-(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N'),
-(6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', 'S'),
-(7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', 'S'),
-(8, 2, 'Relógio', 'Relógio', '2022-01-31 00:00:40', '1250', 'S'),
-(9, 2, 'Carro', 'Carro de 1990', '2022-01-31 00:00:40', '2350', 'S');
+INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `imagem`, `aprovado`) VALUES
+(1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', NULL, 'S'),
+(2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', NULL, 'S'),
+(3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', NULL, 'N'),
+(4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', NULL, 'N'),
+(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', NULL, 'N'),
+(6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', NULL, 'S'),
+(7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', NULL, 'S'),
+(8, 27, 'Relógio', 'Relógioy', '2021-12-31 00:00:26', '1250', '', 'S'),
+(9, 2, 'Carro', 'Carro antigo 1990', '2022-01-31 00:00:40', '2550', NULL, 'S'),
+(10, 2, 'carro', 'aaaa', '2022-01-05 13:13:08', '1000', 'uploads/vendacarro3196.png', 'N'),
+(11, 2, 'carro', 'azul', '2022-01-06 14:10:33', '100', 'uploads/vendacarro1270.png', 'N'),
+(27, 3, 'LeilaoTeste', 'LeilaoTeste', '2022-01-31 00:00:00', '2500', NULL, 'S');
 
 -- --------------------------------------------------------
 
@@ -157,14 +162,14 @@ INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `prec
 DROP TABLE IF EXISTS `leilaooferta`;
 CREATE TABLE IF NOT EXISTS `leilaooferta` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idleilao` int(11) NOT NULL,
-  `iduser` int(11) NOT NULL,
+  `idleilao` int(11) DEFAULT NULL,
+  `iduser` int(11) DEFAULT NULL,
   `dataoferta` timestamp NOT NULL DEFAULT current_timestamp(),
   `montante` decimal(10,0) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `idleilao` (`idleilao`),
   KEY `iduser` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilaooferta`
@@ -173,7 +178,16 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
 INSERT INTO `leilaooferta` (`id`, `idleilao`, `iduser`, `dataoferta`, `montante`) VALUES
 (1, 1, 24, '2021-12-07 12:22:11', '250'),
 (2, 1, 24, '2021-12-09 11:28:33', '257'),
-(3, 6, 27, '2021-12-21 13:15:56', '1250');
+(3, 6, 27, '2021-12-21 13:15:56', '1250'),
+(4, 9, 3, '2022-01-04 17:17:24', '2350'),
+(5, 9, 3, '2022-01-04 17:18:38', '1250'),
+(6, 9, 3, '2022-01-04 17:19:35', '10000'),
+(7, 9, 3, '2022-01-04 17:20:24', '15000'),
+(8, 9, 3, '2022-01-04 17:20:51', '15000'),
+(9, 9, 3, '2022-01-04 17:21:22', '20000'),
+(10, 9, 3, '2022-01-04 17:21:41', '20000'),
+(11, 9, 27, '2022-01-05 15:08:10', '12'),
+(12, 9, 27, '2022-01-05 15:21:42', '12');
 
 -- --------------------------------------------------------
 
@@ -230,8 +244,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(2, 'Monteiro', '', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', NULL, 'MonteiroAdmin@admin.pt', 10, '2022-01-04 16:35:25', '2022-01-04 16:35:25', NULL),
-(3, 'MonteiroTestes', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', 'admin123', NULL, 'Monteirotestes@testes.pt', 10, '2022-01-04 17:15:25', '2022-01-04 17:15:25', NULL);
+(3, 'Monteiro', '', 'admin123', NULL, 'Monteiro@teste.pt', 10, '2022-01-05 18:34:54', '2022-01-05 18:34:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -242,25 +255,33 @@ INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_res
 DROP TABLE IF EXISTS `venda`;
 CREATE TABLE IF NOT EXISTS `venda` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `idUser` int(11) NOT NULL,
+  `idUser` int(11) DEFAULT NULL,
   `titulo` varchar(50) NOT NULL,
   `descricao` text NOT NULL,
   `preco` decimal(10,0) NOT NULL,
+  `imagem` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userVenda` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `venda`
 --
 
-INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`) VALUES
-(1, 26, 'Venda1', 'Descrição Venda 1', '450'),
-(2, 24, 'Venda 2', 'Descrição venda 2 ', '500');
+INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`, `imagem`) VALUES
+(5, 27, 'carro', 'carro azul azul', '1000', 'uploads/vendacarro714.png'),
+(6, 2, 'Mota', 'Mota eletrica', '1000', 'uploads/vendaMota309.jpg'),
+(9, 27, 'Relogio', 'classico', '50', 'uploads/vendaRelogio159.jpg');
 
 --
 -- Restrições para despejos de tabelas
 --
+
+--
+-- Limitadores para a tabela `auth_assignment`
+--
+ALTER TABLE `auth_assignment`
+  ADD CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `auth_item`
@@ -274,25 +295,6 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `leilao`
---
-ALTER TABLE `leilao`
-  ADD CONSTRAINT `userLeilao` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
-
---
--- Limitadores para a tabela `leilaooferta`
---
-ALTER TABLE `leilaooferta`
-  ADD CONSTRAINT `leilaooferta_ibfk_1` FOREIGN KEY (`idleilao`) REFERENCES `leilao` (`id`),
-  ADD CONSTRAINT `leilaooferta_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`);
-
---
--- Limitadores para a tabela `venda`
---
-ALTER TABLE `venda`
-  ADD CONSTRAINT `userVenda` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

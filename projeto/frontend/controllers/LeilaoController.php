@@ -98,7 +98,9 @@ class LeilaoController extends Controller
     public function actionCreate()
     {
         if (\Yii::$app->user->isGuest){
-            return $this->goHome();
+            return $this->render('site/index', [
+
+            ]);
         }else{
             $model = new Leilao();
 

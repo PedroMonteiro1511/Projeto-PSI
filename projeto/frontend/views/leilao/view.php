@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $data1 = gmdate('Y-m-d h:i:s \G\M\T');
         $data2 = $model->datalimite;
 
-        if (Yii::$app->getUser()->id == $model->idUser && $data1>$data2){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
+        if (Yii::$app->getUser()->id == $model->idUser && $data2>$data1){   // Somente o autor do anuncio pode alterar/ apagar o anuncio.
             ?>
             <?=        // If true
             Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']);
@@ -41,14 +41,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
-                    'confirm' => 'Are you sure you want to delete this item?',
                     'method' => 'post',
                 ],
             ]);
             ?>
             <?php
-
-
         }
 ?>
 

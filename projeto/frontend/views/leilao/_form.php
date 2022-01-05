@@ -38,11 +38,11 @@ use dosamigos\datetimepicker\DateTimePicker;
             'linkFormat' => 'yyyy-mm-dd HH:ii:ss P',
             'todayBtn' => true
         ]
-    ]);?>
+    ])->label('Data');?>
 
-    <?= $form->field($model, 'precobase')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'precobase')->textInput(['maxlength' => true])->label('Preço') ?>
 
-    <?= $form->field($model, 'imagem')->fileInput()->label('Inserir imagem') ?>
+    <?= $form->field($model, 'imagem')->fileInput()->label('Imagem') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

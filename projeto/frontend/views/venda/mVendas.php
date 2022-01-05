@@ -198,7 +198,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <h2>Minhas <b>Vendas</b></h2>
                     </div>
                     <div class="col-sm-7">
-                        <?= Html::a('<i class="material-icons">&#xE147;</i><span>Adicionar uma Venda</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+                        <?= Html::a('<span>Adicionar uma Venda</span>', ['create'], ['class' => 'btn btn-secondary'])?>
                     </div>
                 </div>
             </div>
@@ -226,7 +226,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td>
                                 <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['venda/view', 'id' => $venda->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
                                 <?= Html::a('<i class="material-icons">sync</i>', ['venda/update', 'id' => $venda->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">delete</i>', ['venda/delete', 'id' => $venda->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
+                                    <?= Html::a('<i class="material-icons">delete</i>', ['venda/delete', 'id' => $venda->id], ['class' => 'delete','title'=>'Apagar', 'data' => ['method' => 'post'],'data-toggle'=>'tooltip']); ?>
                             </td>
                         </tr>
                     <?php } ?>
