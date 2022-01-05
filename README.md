@@ -54,7 +54,8 @@ outro com id:3 username:Monteiro.
         
       
   Funcionais: 3 FRONTEND
-      -leiloesCest  -- php vendor/bin/codecept run functional leiloesCest -c -frontend
+  
+     -leiloesCest  -- php vendor/bin/codecept run functional leiloesCest -c -frontend
       Testes para:
         -Criar uma oferta a um leilão.
         -Criar um leilão.
