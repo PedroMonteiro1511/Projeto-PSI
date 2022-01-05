@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 05-Jan-2022 às 12:38
+-- Tempo de geração: 05-Jan-2022 às 19:19
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.4.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `yii2advanced`
+-- Banco de dados: `bdteste`
 --
 
 -- --------------------------------------------------------
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
 ('admin', '2', NULL),
-('admin', '3', NULL),
+('admin', '27', NULL),
 ('gestor', '3', NULL);
 
 -- --------------------------------------------------------
@@ -129,25 +129,28 @@ CREATE TABLE IF NOT EXISTS `leilao` (
   `descricao` text NOT NULL,
   `datalimite` datetime NOT NULL,
   `precobase` decimal(10,0) NOT NULL,
+  `imagem` text DEFAULT NULL,
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilao`
 --
 
-INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `aprovado`) VALUES
-(1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', 'S'),
-(2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', 'S'),
-(3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', 'N'),
-(4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', 'N'),
-(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N'),
-(6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', 'S'),
-(7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', 'S'),
-(8, 27, 'Relógio', 'Relógio', '2021-12-31 00:00:26', '1250', 'S'),
-(9, 2, 'Carro', 'Carro antigo 1990', '2022-01-31 00:00:40', '2550', 'S');
+INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `imagem`, `aprovado`) VALUES
+(1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', NULL, 'S'),
+(2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', NULL, 'S'),
+(3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', NULL, 'N'),
+(4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', NULL, 'N'),
+(5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', NULL, 'N'),
+(6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', NULL, 'S'),
+(7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', NULL, 'S'),
+(8, 27, 'Relógio', 'Relógioy', '2021-12-31 00:00:26', '1250', '', 'S'),
+(9, 2, 'Carro', 'Carro antigo 1990', '2022-01-31 00:00:40', '2550', '', 'S'),
+(11, 2, 'carro', 'azul', '2022-01-06 14:10:33', '100', 'uploads/vendacarro1270.png', 'N'),
+(13, 3, 'Leilaoteste', 'Leilaoteste', '2022-01-31 00:00:05', '2550', 'uploads/vendaLeilaoteste2176.png', 'S');
 
 -- --------------------------------------------------------
 
@@ -165,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
   PRIMARY KEY (`id`),
   KEY `idleilao` (`idleilao`),
   KEY `iduser` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilaooferta`
@@ -181,7 +184,9 @@ INSERT INTO `leilaooferta` (`id`, `idleilao`, `iduser`, `dataoferta`, `montante`
 (7, 9, 3, '2022-01-04 17:20:24', '15000'),
 (8, 9, 3, '2022-01-04 17:20:51', '15000'),
 (9, 9, 3, '2022-01-04 17:21:22', '20000'),
-(10, 9, 3, '2022-01-04 17:21:41', '20000');
+(10, 9, 3, '2022-01-04 17:21:41', '20000'),
+(11, 9, 27, '2022-01-05 15:08:10', '12'),
+(12, 9, 27, '2022-01-05 15:21:42', '12');
 
 -- --------------------------------------------------------
 
@@ -231,16 +236,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(2, 'MonteiroAdmin', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', '$2y$13$uxWQBNgmD90PwYNmXMbqpOG8B45lBWj5jZhNJyyX9CznTyDZZ7pDy', NULL, 'MonteiroAdmin@admin.pt', 10, '2022-01-03 14:42:56', '2022-01-03 14:42:56', 'skqSHtYl98MQXskKSHVuGGNhdY79_EZi_1641220976'),
+(2, 'MonteiroAdmin', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', '$2y$13$YvnT1BcckHsf89Co55iFtetfjIU87oosYEf3ewA1b7a8ugXzDz14m', NULL, 'MonteiroAdmin@admin.pt', 10, '2022-01-03 14:42:56', '2022-01-03 14:42:56', 'skqSHtYl98MQXskKSHVuGGNhdY79_EZi_1641220976'),
 (3, 'Monteiro', 'dnZsrENb1gwikexLeYZUw7rDxH19qNL1', '$2y$13$hrsVWwgZN7ZpX2zqRFW5pecswbaw5/JZrJLcOceH.bVQMqnXhtIve', NULL, 'monteiro@admin2.pt', 10, '2022-01-04 11:04:21', '2022-01-04 11:04:21', 'lFikcC7yMQHsdcn1J_mc15_qjUv_S_ff_1641294261'),
-(26, 'Monteiro26', 'g2w1UH79yLVmBIsBY0-wIKpWXug1OD8R', '$2y$13$VZDz6pkOjpJUsWpdzKWhYOcd09DjxuCuAZT/M/gZQmFVIMltljSJi', NULL, 'pedromonteiro@outlook.pt', 10, '2022-01-04 16:56:45', '2022-01-04 16:56:45', 'y10YZMnvqHvkr_2Yr941XQ55w9O8pPTr_1641315405');
+(27, 'ramos123', 'wcL6VCSNB74TMhp4Q4d1cC0mGTeUAH62', '$2y$13$1WFeD1iSCQiRvkihvMN4HOTaKZ2ydPGf6S/z0je40xVwNV/4BZBeq', NULL, 'jramos@gmail.com', 10, '2022-01-05 15:07:07', '2022-01-05 15:07:07', 'tkCzYj6MYg6W8caa7o9Al0I6yb3yFKjU_1641395227'),
+(28, 'teste100', 'EgA-vVpZlTXt-_gWEQnJlm40MUb1mAN8', '$2y$13$QpTAuzvkExETVVHytvwLYONGMowsK3Ahb2yuJpwuP4EyiC5jnVrFq', NULL, 'teste@gmail.com', 10, '2022-01-05 15:25:42', '2022-01-05 15:25:42', NULL),
+(29, 'Monteiro.2', 'Y1AOxq8IcqacrstID2m0qt_dYuiVxDR0', '$2y$13$SOFPwgsBjZToHn9xGEXnluZwnNWjJt8eIQB6g6HaLwITaIuPlHQVy', NULL, 'Monteiro2@something.pt', 10, '2022-01-05 18:21:27', '2022-01-05 18:21:27', 'XjgS2NRiA6NReoiMq3KFqT_XvTnHMsSh_1641406887'),
+(30, 'MonteiroNormal', 'ODH9ynfO4u6aEK0lIVppEuGr9BJdrHgD', '$2y$13$w55rlpbdxKKe5lqINE4ij.MxImapBDHvnoVTapCsOHDenQNUJWwp6', NULL, 'MonteiroNormal@normal.pt', 10, '2022-01-05 19:12:43', '2022-01-05 19:12:43', 'BKc89r2SoCQRazx6tWioEXl-8usc3pfo_1641409963');
 
 -- --------------------------------------------------------
 
@@ -255,17 +263,19 @@ CREATE TABLE IF NOT EXISTS `venda` (
   `titulo` varchar(50) NOT NULL,
   `descricao` text NOT NULL,
   `preco` decimal(10,0) NOT NULL,
+  `imagem` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userVenda` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `venda`
 --
 
-INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`) VALUES
-(1, 26, 'Venda1', 'Descrição Venda 1', '450'),
-(2, 24, 'Venda 2', 'Descrição venda 2 ', '500');
+INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`, `imagem`) VALUES
+(5, 2, 'carro', 'carro azul azul', '1000', 'uploads/vendacarro714.png'),
+(6, 2, 'Mota', 'Mota eletrica', '15000', 'uploads/vendaMota340.png'),
+(9, 27, 'Relogio', 'classico', '50', 'uploads/vendaRelogio159.jpg');
 
 --
 -- Restrições para despejos de tabelas
@@ -289,25 +299,6 @@ ALTER TABLE `auth_item`
 ALTER TABLE `auth_item_child`
   ADD CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Limitadores para a tabela `leilao`
---
-ALTER TABLE `leilao`
-  ADD CONSTRAINT `userLeilao` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
-
---
--- Limitadores para a tabela `leilaooferta`
---
-ALTER TABLE `leilaooferta`
-  ADD CONSTRAINT `leilaooferta_ibfk_1` FOREIGN KEY (`idleilao`) REFERENCES `leilao` (`id`),
-  ADD CONSTRAINT `leilaooferta_ibfk_2` FOREIGN KEY (`iduser`) REFERENCES `user` (`id`);
-
---
--- Limitadores para a tabela `venda`
---
-ALTER TABLE `venda`
-  ADD CONSTRAINT `userVenda` FOREIGN KEY (`idUser`) REFERENCES `user` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
