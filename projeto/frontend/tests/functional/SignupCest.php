@@ -41,16 +41,16 @@ class SignupCest
 
     public function signupSuccessfully(FunctionalTester $I)
     {
-        $I->submitForm($this->formId, [
+        $I->submitForm($this->formId , [
             'SignupForm[username]' => 'tester',
             'SignupForm[email]' => 'tester.email@example.com',
             'SignupForm[password]' => 'tester_password',
         ]);
 
         $I->seeRecord('common\models\User', [
-            'username' => 'tester',
-            'email' => 'tester.email@example.com',
-            'status' => \common\models\User::STATUS_INACTIVE
+            'username' => 'Monteiro',
+            'email' => 'MonteiroAdmin@admin.pt',
+            'status' => \common\models\User::STATUS_ACTIVE
         ]);
 
         $I->seeEmailIsSent();

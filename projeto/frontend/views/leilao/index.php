@@ -13,34 +13,66 @@ use yii\widgets\ActiveForm;
 $this->title = 'Leilões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="leilao-index">
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<div class="leilao-index" >
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+    </style>
+
+
+    <section class="sections random-product">
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
 
     <?php foreach ($leiloes as $leilao): ?>
 
     <?php
     $datahoje = new DateTime('now');
     $datalimite = new DateTime($leilao->datalimite);
+    $aprovado = $leilao->aprovado;
 
-    if ($datalimite > $datahoje){
+    if (($datalimite > $datahoje) && ($leilao->aprovado == 'S')){
 
 
 
     ?>
 
-    <div class="card-deck">
-        <div class="card" style="width: 100%; background-color: #D3D3D3; margin-top: 5px ">
-            <img class="card-img-top" src="">
-            <div class="card-body">
-                <h5 class="card-title"><?= $leilao->titulo ?> </h5>
-                <p class="card-text"><?= $leilao->descricao ?></p>
-                <p class="card-text"><small><?= $leilao->datalimite ?></small></p>
-                <p> <?=Html::a('Ver mais...', ['view', 'id' => $leilao->id], ['class' => 'btn btn-primary']); ?> </p>
+        <div class="col-md-4">
+            <div class="card" style="margin-bottom: 5px;">
+                <img class="card-img-top" src="http://www.mihanmedia.ir/userfile/736708307-580x567.jpg" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <?= $leilao->titulo ?>
+                    </h5>
+                </div>
+                <div class="card-footer">
+                    <p> <?=Html::a('Ver mais...', ['view', 'id' => $leilao->id], ['class' => 'badge badge float-right','name'=>'btn-ver']); ?> </p>
+                    <div class="float-left">
+                        <a class="text-danger"><?= $leilao->descricao ?></a>
+                        <br>
+                        <small class="text-muted">Preço Base: <b><?= $leilao->precobase ?> €</b></small>
+                    </div>
+                    <div class="float-right">
+                        <br>
+                        <small class="text-muted">Fim:<?= $leilao->datalimite ?> </small>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+        </div><!--.col-->
 
         <?php
         }
@@ -50,4 +82,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endforeach; ?>
 
 
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </div>
+
+
+
+

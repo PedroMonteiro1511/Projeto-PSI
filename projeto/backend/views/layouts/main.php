@@ -50,6 +50,18 @@ AppAsset::register($this);
                 ]
 
         ];
+        if (Yii::$app->user->can('gestor')){
+            $menuItems[] = [
+
+                'label' => 'Área de gestor', 'items' =>
+                    [
+                        ['label' => 'Gerir Aprovações', 'url' => ['/leilao/indexap']],
+                    ]
+
+            ];
+        }
+
+
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
             . Html::submitButton(

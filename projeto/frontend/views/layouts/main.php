@@ -66,8 +66,7 @@ $menuItems = [
             'label' => 'Meus Artigos', 'items' =>
                 [
                     ['label' => 'Meus leilões', 'url' => ['/leilao/mleilao']],
-                    ['label' => 'Minhas vendas', 'url' => ['/venda/mvenda']],
-                    ['label' => 'Favoritos', 'url' => ['/site/favorito']]
+                    ['label' => 'Minhas vendas', 'url' => ['/venda/mvenda']]
                 ]
 
         ];

@@ -4,14 +4,12 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UserSearch */
+/* @var $searchModel app\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Painel de Utilizadores';
+$this->title = 'Aprovamento de Leilões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -203,32 +201,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-5">
-                            <h2>Painel de <b>Utilizadores</b></h2>
+                            <h2>Painel de <b>Leilões</b></h2>
                         </div>
                     </div>
                 </div>
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
+                        <th>Titulo</th>
+                        <th>Data Limite</th>
+                        <th>Preço base</th>
+                        <th>Aprovado</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($leiloes as $leilao): ?>
+                        <?php
+                        $datahoje = new DateTime('now');
+                        $datalimite = new DateTime($leilao->datalimite);
+                        if ($datalimite > $datahoje){
 
+
+                            ?>
                             <tr>
-                                <td><?= $user->id ?></td>
-                                <td><a href="#"><?= Html::a($user->username, ['user/view', 'id' => $user->id], ['class' => 'settings','title'=>$user->username, 'data-toggle'=>'tooltip']); ?></a></td>
-                                <td><?= $user->email ?> </td>
-                                <td>
-                                    <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['user/view', 'id' => $user->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">sync</i>', ['user/update', 'id' => $user->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">delete</i>', ['user/delete', 'id' => $user->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
-                                </td>
-
+                                <td><a href="#"><?= Html::a($leilao->titulo, ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>$leilao->titulo, 'data-toggle'=>'tooltip']); ?></a></td>
+                                <td><?= $leilao->datalimite ?> </td>
+                                <td><?= $leilao->precobase ?> €</td>
+                                <?php
+                                if ($leilao->aprovado == 'S'){
+                                    echo '<td><span class="status text-success">&bull;</span>' ?> Sim <?php '</td>';
+                                    echo '<td>' ?>
+                                <?= Html::a('<i class="material-icons" style="color: red">clear</i>', ['updateaprovado', 'id' => $leilao->id], ['class' => 'settings','title'=>'Retirar', 'data-toggle'=>'tooltip']); ?>
+                                    <?= Html::a('<i class="material-icons" >remove_red_eye</i>', ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
+                                <?php '</td>';
+                                }elseif ($leilao->aprovado == 'N'){
+                                    echo '<td><span class="status text-danger"">&bull;</span>' ?> Não <?php '</td>';
+                                    echo '<td>' ?>
+                                    <?= Html::a('<i class="material-icons" >check</i>', ['updateaprovado', 'id' => $leilao->id], ['class' => 'settings','title'=>'Aprovar', 'data-toggle'=>'tooltip']); ?>
+                                    <?= Html::a('<i class="material-icons" >remove_red_eye</i>', ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
+                                    <?php '</td>';
+                                }
+                                ?>
+                            </tr>
+                        <?php } ?>
                     <?php endforeach; ?>
                     </tbody>
                 </table>

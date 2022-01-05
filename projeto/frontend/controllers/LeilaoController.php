@@ -120,10 +120,13 @@ class LeilaoController extends Controller
         if (Yii::$app->user->isGuest){
             return $this->render('index');
         }else{
+            $query = Leilao::find();
+            $leiloes = $query->all();
             $searchModel = new LeilaoSearch();
             $dataProvider = $searchModel->searchID($this->request->queryParams);
 
-            return $this->render('mVendas', [
+            return $this->render('mLeiloes', [
+                'leiloes' => $leiloes,
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

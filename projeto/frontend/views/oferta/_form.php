@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
 
 
-    <?= $form->field($model, 'montante')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'montante')->textInput(['maxlength' => true])->label('Montante') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

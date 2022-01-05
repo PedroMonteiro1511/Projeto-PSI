@@ -13,6 +13,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="venda-view">
 
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+    </style>
+
     <h1><?= Html::encode($this->title); ?></h1>
     <p>
         <?php
@@ -40,16 +49,30 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            'descricao:ntext',
-            'preco',
-        ],
-    ]) ?>
 
-    <?= Html::a('⭐ Adicionar aos Favoritos', ['favoritos', 'id' => $model->id], ['class' => 'btn btn-primary']); ?>
-    <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"><?= $model->titulo ?></h3>
+                <div class="row">
+                    <div class="col-lg-5 col-md-5 col-sm-6">
+                        <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></div>
+                    </div>
+                    <div class="col-lg-7 col-md-7 col-sm-6">
+                        <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
+                        <p><?= $model->descricao ?></p>
+                        <h2 class="mt-5">
+                            <?= $model->preco ?>  €<small class="text-success"></small>
+                        </h2>
+
+                        <?= Html::a('📞 Contactar o Vendedor', ['user/details', 'id' => $model->idUser], ['class' => 'btn btn-primary']); ?>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

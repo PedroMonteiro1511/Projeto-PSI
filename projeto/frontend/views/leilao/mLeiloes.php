@@ -1,18 +1,15 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\UserSearch */
+/* @var $model common\models\Leilao */
+/* @var $searchModel common\models\LeilaoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Painel de Utilizadores';
+$this->title = 'Meus Leilões';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -191,57 +188,68 @@ $this->params['breadcrumbs'][] = $this->title;
 </script>
 
 
-<div class="leilao-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-
-
-    <div class="container-xl">
-        <div class="table-responsive">
-            <div class="table-wrapper">
-                <div class="table-title">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <h2>Painel de <b>Utilizadores</b></h2>
-                        </div>
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-5">
+                        <h2>Meus <b>Leilões</b></h2>
+                    </div>
+                    <div class="col-sm-7">
+                        <?= Html::a('<i class="material-icons">&#xE147;</i><span>Adicionar um leilão</span>', ['create'], ['class' => 'btn btn-secondary'])?>
                     </div>
                 </div>
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    <?php foreach ($users as $user): ?>
-
-                            <tr>
-                                <td><?= $user->id ?></td>
-                                <td><a href="#"><?= Html::a($user->username, ['user/view', 'id' => $user->id], ['class' => 'settings','title'=>$user->username, 'data-toggle'=>'tooltip']); ?></a></td>
-                                <td><?= $user->email ?> </td>
-                                <td>
-                                    <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['user/view', 'id' => $user->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">sync</i>', ['user/update', 'id' => $user->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
-                                    <?= Html::a('<i class="material-icons">delete</i>', ['user/delete', 'id' => $user->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
-                                </td>
-
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-
             </div>
-        </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Data Limite</th>
+                    <th>Preço base</th>
+                    <th>Aprovado</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <?php foreach ($leiloes as $leilao): ?>
+                <?php
+                    if ($leilao->idUser == Yii::$app->getUser()->id){
 
 
-
-
-
-
-
+                    ?>
+                    <tr>
+                        <td><a href="#"><?= Html::a($leilao->titulo, ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>$leilao->titulo, 'data-toggle'=>'tooltip']); ?></a></td>
+                        <?php
+                        $datahoje = new DateTime('now');
+                        $datalimite = new DateTime($leilao->datalimite);
+                        if ($datalimite < $datahoje){
+                            echo '<td style="color: red"><span class="status text-success"></span>' ?> <?= $leilao->datalimite ?> <?php '</td>';
+                        }else{
+                            echo '<td><span class="status text-success"></span>' ?> <?= $leilao->datalimite ?> <?php '</td>';
+                        }
+                        ?>
+                        <td><?= $leilao->precobase ?> €</td>
+                        <?php
+                        if ($leilao->aprovado == 'S'){
+                            echo '<td><span class="status text-success">&bull;</span>' ?> Sim <?php '</td>';
+                        }elseif ($leilao->aprovado == 'N'){
+                            echo '<td><span class="status text-danger">&bull;</span>' ?> Não <?php '</td>';
+                        }
+                        ?>
+                        <td>
+                            <?= Html::a('<i class="material-icons">remove_red_eye</i>', ['leilao/view', 'id' => $leilao->id], ['class' => 'settings','title'=>'Mais Informações', 'data-toggle'=>'tooltip']); ?>
+                            <?= Html::a('<i class="material-icons">sync</i>', ['leilao/update', 'id' => $leilao->id], ['class' => 'settings','title'=>'Atualizar', 'data-toggle'=>'tooltip']); ?>
+                            <?= Html::a('<i class="material-icons">delete</i>', ['leilao/delete', 'id' => $leilao->id], ['class' => 'delete','title'=>'Apagar', 'data-toggle'=>'tooltip']); ?>
+                        </td>
+                    </tr>
+                    <?php } ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
 
     </div>
 </div>
+
+

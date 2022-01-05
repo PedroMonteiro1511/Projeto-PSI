@@ -71,4 +71,38 @@ class LeilaoSearch extends Leilao
 
         return $dataProvider;
     }
+
+    public function searchAprovados($params)
+    {
+        $query = Leilao::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'idUser' => $this->idUser,
+            'datalimite' => $this->datalimite,
+            'precobase' => $this->precobase,
+            'aprovado' => 'N'
+        ]);
+
+        $query->andFilterWhere(['like', 'titulo', $this->titulo])
+            ->andFilterWhere(['like', 'descricao', $this->descricao])
+            ->andFilterWhere(['like', 'aprovado', $this->aprovado]);
+
+        return $dataProvider;
+    }
 }

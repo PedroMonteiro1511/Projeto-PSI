@@ -60,10 +60,13 @@ class VendaController extends Controller
         if (Yii::$app->user->isGuest){
             return $this->render('index');
         }else{
+            $query = Venda::find();
+            $vendas = $query->all();
             $searchModelVenda = new VendaSearch();
             $dataProviderVenda = $searchModelVenda->searchVenda($this->request->queryParams);
 
             return $this->render('mVendas', [
+                'vendas' => $vendas,
                 'searchModelVenda' => $searchModelVenda,
                 'dataProviderVenda' => $dataProviderVenda,
             ]);

@@ -15,6 +15,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="leilao-view">
 
+    <style>
+        body {
+            color: #566787;
+            background: #f5f5f5;
+            font-family: 'Varela Round', sans-serif;
+            font-size: 13px;
+        }
+    </style>
+
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
@@ -41,45 +50,79 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         }
+?>
 
-        if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){ ?>
-        <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
-        <?php
-        }  // FIM DO IF
-        ?>
     </p>
 
     <?php
     if (Yii::$app->getUser()->id == $model->idUser){
         ?>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            'descricao:ntext',
-            'datalimite',
-            'precobase',
-            'aprovado',
-        ],
-    ]) ?>
-    <?php
-    } else {
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"><?= $model->titulo ?></h3>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-6">
+                            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-6">
+                            <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
+                            <p><?= $model->descricao ?></p>
+                            <h2 class="mt-5">
+                               Preço Base: <?= $model->precobase ?> €<small class="text-success"></small>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    <?php } else {
 
     ?>
-        <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'titulo',
-            'descricao:ntext',
-            'datalimite',
-            'precobase',
-        ],
-    ]) ?>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title"><?= $model->titulo ?></h3>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-6">
+                            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-6">
+                            <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
+                            <p><?= $model->descricao ?></p>
+                            <h2 class="mt-5">
+                               Preço base: <?= $model->precobase ?> €<small class="text-success"></small>
+                            </h2>
+                            <?php
+                            if (!Yii::$app->user->isGuest && Yii::$app->getUser()->id != $model->idUser && $data1<$data2){ ?>
+                            <?=    Html::a('Oferta', ['oferta/create', 'id' => $model->id, 'iduser' => Yii::$app->user->getId()], ['class' => 'btn btn-primary']); ?>
+                            <?php
+                            }  // FIM DO IF
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <?php
     }
     ?>
+
+
+
+
+
+
+
 
 
     <style>
@@ -110,13 +153,19 @@ $this->params['breadcrumbs'][] = $this->title;
             background-color: lightgrey;
         }
     </style>
+
+    <?php
+    if ($model->idUser == Yii::$app->getUser()->id){
+
+
+echo '
     <table>
         <tr>
             <th>Data Oferta</th>
             <th>Montante</th>
             <th>Participante</th>
-        </tr>
-
+        </tr>';
+ ?>
     <?php foreach ($ofertas as $oferta): ?>
 
 
@@ -128,10 +177,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             ?>
-
             <tr>
                 <td> <?= $oferta->dataoferta ?> </td>
-                <td> <?= $oferta->montante ?> </td>
+                <td> <?= $oferta->montante ?> € </td>
                 <td> <?= Html::a('Contactar participante', ['user/details', 'id' => $oferta->iduser], ['class' => 'btn btn-primary'])?></td>
             </tr>
 
@@ -142,6 +190,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php endforeach; ?>
 
+    <?php
+    }
+    ?>
         </table>
 
 

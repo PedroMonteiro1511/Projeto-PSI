@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 05-Jan-2022 às 12:38
+-- Tempo de geração: 05-Jan-2022 às 12:39
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.4.0
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `yii2advanced`
+-- Banco de dados: `yii2tests`
 --
 
 -- --------------------------------------------------------
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 --
 
 INSERT INTO `auth_assignment` (`item_name`, `user_id`, `created_at`) VALUES
-('admin', '2', NULL),
-('admin', '3', NULL),
-('gestor', '3', NULL);
+('admin', '24', NULL),
+('admin', '27', NULL),
+('gestor', '28', NULL);
 
 -- --------------------------------------------------------
 
@@ -140,14 +140,13 @@ CREATE TABLE IF NOT EXISTS `leilao` (
 
 INSERT INTO `leilao` (`id`, `idUser`, `titulo`, `descricao`, `datalimite`, `precobase`, `aprovado`) VALUES
 (1, 24, 'Leilao1', 'Leilao1', '2021-11-23 13:04:05', '250', 'S'),
-(2, 26, '2Leilao', '2leilao', '2021-11-24 13:04:56', '250', 'S'),
 (3, 27, 'leilao3', 'leilao3', '2021-11-23 13:04:00', '450', 'N'),
 (4, 27, 'leilao4', 'leilao4', '2021-11-23 13:04:00', '450', 'N'),
 (5, 24, 'Leilao2', 'Leilao23', '2021-11-30 12:40:11', '567', 'N'),
 (6, 24, 'Objeto1', 'Objeto1', '2021-12-31 13:04:05', '582', 'S'),
 (7, 24, 'Carro', 'Carro', '2021-12-31 13:05:23', '4350', 'S'),
-(8, 27, 'Relógio', 'Relógio', '2021-12-31 00:00:26', '1250', 'S'),
-(9, 2, 'Carro', 'Carro antigo 1990', '2022-01-31 00:00:40', '2550', 'S');
+(8, 2, 'Relógio', 'Relógio', '2022-01-31 00:00:40', '1250', 'S'),
+(9, 2, 'Carro', 'Carro de 1990', '2022-01-31 00:00:40', '2350', 'S');
 
 -- --------------------------------------------------------
 
@@ -165,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
   PRIMARY KEY (`id`),
   KEY `idleilao` (`idleilao`),
   KEY `iduser` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilaooferta`
@@ -174,14 +173,7 @@ CREATE TABLE IF NOT EXISTS `leilaooferta` (
 INSERT INTO `leilaooferta` (`id`, `idleilao`, `iduser`, `dataoferta`, `montante`) VALUES
 (1, 1, 24, '2021-12-07 12:22:11', '250'),
 (2, 1, 24, '2021-12-09 11:28:33', '257'),
-(3, 6, 27, '2021-12-21 13:15:56', '1250'),
-(4, 9, 3, '2022-01-04 17:17:24', '2350'),
-(5, 9, 3, '2022-01-04 17:18:38', '1250'),
-(6, 9, 3, '2022-01-04 17:19:35', '10000'),
-(7, 9, 3, '2022-01-04 17:20:24', '15000'),
-(8, 9, 3, '2022-01-04 17:20:51', '15000'),
-(9, 9, 3, '2022-01-04 17:21:22', '20000'),
-(10, 9, 3, '2022-01-04 17:21:41', '20000');
+(3, 6, 27, '2021-12-21 13:15:56', '1250');
 
 -- --------------------------------------------------------
 
@@ -231,16 +223,15 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
-(2, 'MonteiroAdmin', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', '$2y$13$uxWQBNgmD90PwYNmXMbqpOG8B45lBWj5jZhNJyyX9CznTyDZZ7pDy', NULL, 'MonteiroAdmin@admin.pt', 10, '2022-01-03 14:42:56', '2022-01-03 14:42:56', 'skqSHtYl98MQXskKSHVuGGNhdY79_EZi_1641220976'),
-(3, 'Monteiro', 'dnZsrENb1gwikexLeYZUw7rDxH19qNL1', '$2y$13$hrsVWwgZN7ZpX2zqRFW5pecswbaw5/JZrJLcOceH.bVQMqnXhtIve', NULL, 'monteiro@admin2.pt', 10, '2022-01-04 11:04:21', '2022-01-04 11:04:21', 'lFikcC7yMQHsdcn1J_mc15_qjUv_S_ff_1641294261'),
-(26, 'Monteiro26', 'g2w1UH79yLVmBIsBY0-wIKpWXug1OD8R', '$2y$13$VZDz6pkOjpJUsWpdzKWhYOcd09DjxuCuAZT/M/gZQmFVIMltljSJi', NULL, 'pedromonteiro@outlook.pt', 10, '2022-01-04 16:56:45', '2022-01-04 16:56:45', 'y10YZMnvqHvkr_2Yr941XQ55w9O8pPTr_1641315405');
+(2, 'Monteiro', '', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', NULL, 'MonteiroAdmin@admin.pt', 10, '2022-01-04 16:35:25', '2022-01-04 16:35:25', NULL),
+(3, 'MonteiroTestes', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', 'admin123', NULL, 'Monteirotestes@testes.pt', 10, '2022-01-04 17:15:25', '2022-01-04 17:15:25', NULL);
 
 -- --------------------------------------------------------
 
@@ -270,12 +261,6 @@ INSERT INTO `venda` (`id`, `idUser`, `titulo`, `descricao`, `preco`) VALUES
 --
 -- Restrições para despejos de tabelas
 --
-
---
--- Limitadores para a tabela `auth_assignment`
---
-ALTER TABLE `auth_assignment`
-  ADD CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Limitadores para a tabela `auth_item`
