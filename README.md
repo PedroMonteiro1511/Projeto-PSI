@@ -1,11 +1,14 @@
 # Projeto-PSI
 
 Credenciais de acesso:
-
-  -Admin -  Username : MonteiroAdmin , Password : admin123
-  -Gestor -  Username : Monteiro, Password : admin123
+  -Admin -  Username : MonteiroAdmin , Password : admin123.
+  
+  -Gestor -  Username : Monteiro, Password : admin123.
+  
   -Guest - Só pode ver as vendas e os leilões , nao pode perticipar nem leiloar.
-  -User Comum -  Username : MonteiroNormal , Password : normal123
+  
+  -User Comum -  Username : MonteiroNormal , Password : normal123.
+  
   
 É necessário fazer Login com o gestor no backend para ter acesso á 'Área de gestor'. 
 
