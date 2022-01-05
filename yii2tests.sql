@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 05-Jan-2022 às 18:35
+-- Tempo de geração: 05-Jan-2022 às 18:40
 -- Versão do servidor: 10.4.10-MariaDB
 -- versão do PHP: 7.4.0
 
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS `leilao` (
   `aprovado` enum('S','N') NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   KEY `idUser` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `leilao`
@@ -237,13 +237,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Extraindo dados da tabela `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `verification_token`) VALUES
+(2, 'MonteiroTeste', '5NSp8VBDIiiF8h_j7yW5JJz4VAwK_zDs', 'admin123', NULL, 'email@email.teste', 10, '2022-01-05 18:40:40', '2022-01-05 18:40:40', NULL),
 (3, 'Monteiro', '', 'admin123', NULL, 'Monteiro@teste.pt', 10, '2022-01-05 18:34:54', '2022-01-05 18:34:54', NULL);
 
 -- --------------------------------------------------------
@@ -262,7 +263,7 @@ CREATE TABLE IF NOT EXISTS `venda` (
   `imagem` text DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `userVenda` (`idUser`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `venda`
