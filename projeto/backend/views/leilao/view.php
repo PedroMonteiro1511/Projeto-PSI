@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-
         <?php
 
         $data1 = gmdate('Y-m-d h:i:s \G\M\T');
@@ -57,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h3 class="card-title"><?= $model->titulo ?></h3>
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-6">
-                            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></div>
+                            <div class="white-box text-center"><img src="<?= $model->imagem ?>" class="img-responsive"></div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
@@ -71,8 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 
-
-
     <?php } else {
 
         ?>
@@ -84,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <h3 class="card-title"><?= $model->titulo ?></h3>
                     <div class="row">
                         <div class="col-lg-5 col-md-5 col-sm-6">
-                            <div class="white-box text-center"><img src="https://via.placeholder.com/430x600/00CED1/000000" class="img-responsive"></div>
+                            <div class="white-box text-center"><img src="<?= $model->imagem?>" class="img-responsive"></div>
                         </div>
                         <div class="col-lg-7 col-md-7 col-sm-6">
                             <h4 class="box-title mt-5"><?= $model->titulo ?></h4>
@@ -107,14 +104,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
     }
     ?>
-
-
-
-
-
-
-
-
 
     <style>
         span.separator {

@@ -26,15 +26,27 @@ class Venda extends \yii\db\ActiveRecord
         return 'venda';
     }
 
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if ($this->isNewRecord) {
+                $this->idUser = \Yii::$app->getUser()->id;
+            } else {
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['idUser', 'titulo', 'descricao', 'preco', 'imagem'], 'required'],
+            [['idUser', 'titulo', 'descricao', 'preco'], 'required'],
             [['idUser'], 'integer'],
-            [['descricao', 'imagem'], 'string'],
+            [['descricao'], 'string'],
             [['preco'], 'number'],
             [['titulo'], 'string', 'max' => 50],
             [['idUser'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['idUser' => 'id']],

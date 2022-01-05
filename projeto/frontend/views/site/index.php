@@ -22,9 +22,7 @@ $this->title = 'SALES ON';
 
     <div class="jumbotron text-center bg-transparent">
         <h1 class="display-4"> Bem-vindo! </h1>
-
-        <p class="lead">Começa agora a vendar e comprar o que precisas.</p>
-
+        <img src="../web/img/capa.png" alt="Card image cap">
     </div>
 
     <div class="body-content">

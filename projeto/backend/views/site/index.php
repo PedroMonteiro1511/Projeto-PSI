@@ -18,7 +18,7 @@ $this->title = 'SaleOn';
 
             <div class="card-deck">
                 <div class="card">
-                    <img src="..." class="card-img-top">
+                    <img src="../web/img/cliente2.png" class="card-img-top" width="110">
                     <div class="card-body">
                         <h5 class="card-title">Gestão de utilizadores</h5>
                         <p class="card-text">Gerir todos os utilizadores e adiconar novos.</p>
@@ -27,7 +27,7 @@ $this->title = 'SaleOn';
 
                 </div>
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../web/img/venda.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Gestão Vendas</h5>
                         <p class="card-text">É possivel gerir todos os artigos disponivel para vendas e adicionar novos.</p>
@@ -36,7 +36,7 @@ $this->title = 'SaleOn';
 
                 </div>
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../web/img/leilao.png" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Gestão Leilões</h5>
                         <p class="card-text">Gerir todos os leiloes e adicionar novos</p>

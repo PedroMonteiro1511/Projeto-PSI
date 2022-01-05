@@ -7,7 +7,6 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Painel de Utilizadores';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -206,7 +205,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             <h2>Painel de <b>Utilizadores</b></h2>
                         </div>
                         <div class="col-sm-7">
-                            <?= Html::a('<span>Adicionar um Utilizador</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+
+                            <?= Html::a('<i class="material-icons">&#xE147;</i><span>Novo utilizador</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+
                         </div>
                     </div>
                 </div>

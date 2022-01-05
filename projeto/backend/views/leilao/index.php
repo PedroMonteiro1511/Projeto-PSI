@@ -196,6 +196,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-sm-5">
                         <h2>Painel de <b>Leilões</b></h2>
                     </div>
+                    <div class="col-sm-7">
+
+                        <?= Html::a('<i class="material-icons">&#xE147;</i><span>Novo Leilão</span>', ['create'], ['class' => 'btn btn-secondary'])?>
+
+                    </div>
 
                 </div>
             </div>

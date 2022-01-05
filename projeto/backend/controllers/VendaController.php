@@ -32,16 +32,23 @@ class VendaController extends Controller
         );
     }
 
+
+
     /**
      * Lists all Venda models.
      * @return mixed
      */
     public function actionIndex()
     {
+
+        $query = Venda::find();
+        $vendas = $query->all();
+
         $searchModel = new VendaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'vendas' => $vendas,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
