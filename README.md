@@ -18,19 +18,20 @@ Em casos raros , existe a possiblidade de erro em relação ao id do user , nest
 outro com id:3 username:Monteiro.
 
   Unitários: 4 FRONTEND
+  
       -userTest  -- php vendor/bin/codecept run unit userTest -c -frontend
-      Testes para:
-        -Criar Utilizador.
-        -Validar Username.
-        -Validar Password.
-        -Validar Email.
-        -Testar Alteração do username.
-        -Testar Alteração da password.
-        -Testar Alteração do email.
-        -Testar Apagar o Utilizador.
+        -Testes para:
+         -Criar Utilizador.
+         -Validar Username.
+         -Validar Password.
+         -Validar Email.
+         -Testar Alteração do username.
+         -Testar Alteração da password.
+         -Testar Alteração do email.
+         -Testar Apagar o Utilizador.
 
       -ofertaTest  -- php vendor/bin/codecept run unit ofertaTest -c -frontend
-       Testes para:
+       -Testes para:
         -Criar uma oferta.
         -Alterar o montante de uma oferta
       
